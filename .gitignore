@@ -1,0 +1,17 @@
+*
+!.gitignore
+**/.DS_Store
+
+!nvim
+!nvim/**/*
+
+!tmux
+!tmux/**/*
+tmux/plugins
+
+!kitty
+!kitty/**/*
+
+!fish
+!fish/**/*
+
