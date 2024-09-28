@@ -9,7 +9,7 @@ return {
   opts = {
     options = {
       show_buffer_close_icons = false,
-      diagnostics = "nvim_lsp",
+      diagnostics = false,
       indicator = {
         style = "none",
       },
