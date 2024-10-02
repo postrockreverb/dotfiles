@@ -41,7 +41,7 @@ return {
 
     highlight_groups = {
       Number = { fg = "#5BC1A2" },
-      LineNr = { fg = "#3B4261" },
+      -- LineNr = { fg = "#3B4261" },
       LineNr4 = { fg = "#3B4261" },
       LineNr3 = { fg = "#445464" },
       LineNr2 = { fg = "#5D8E97" },

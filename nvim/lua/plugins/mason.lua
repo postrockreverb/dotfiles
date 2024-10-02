@@ -58,6 +58,8 @@ return {
         { "K", vim.lsp.buf.hover },
         { "gd", vim.lsp.buf.definition },
         { "<leader>a", vim.lsp.buf.code_action, desc = "Code actions" },
+        { "<leader>d", group = "Diagnostics" },
+        { "<leader>do", vim.diagnostic.open_float, desc = "Open float" },
       })
     end,
   },

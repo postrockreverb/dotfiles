@@ -3,6 +3,7 @@ set --global --export LANG en_EN.UTF-8
 
 alias v "nvim"
 alias t "tmux"
+alias ta "tmux attach"
 
 alias lv "/Users/yermac/.local/bin/lvim"
 
