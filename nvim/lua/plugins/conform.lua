@@ -37,6 +37,7 @@ return {
           svelte = { "prettierd", "prettier" },
           go = { "gofumpt", "goimports" },
           markdown = { "prettierd", "prettier" },
+          astro = { "prettierd", "prettier" },
         },
       })
 

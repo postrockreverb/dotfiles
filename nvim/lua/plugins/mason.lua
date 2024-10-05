@@ -30,6 +30,7 @@ return {
           "tailwindcss",
           "gopls",
           "ts_ls",
+          "astro",
         },
       })
 
@@ -52,6 +53,7 @@ return {
       require("lspconfig").tailwindcss.setup({})
       require("lspconfig").gopls.setup({})
       require("lspconfig").ts_ls.setup({})
+      require("lspconfig").astro.setup({})
 
       local wk = require("which-key")
       wk.add({

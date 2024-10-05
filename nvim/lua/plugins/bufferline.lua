@@ -21,8 +21,8 @@ return {
 
     local wk = require("which-key")
     wk.add({
-      { "<S-h>", "<cmd>BufferLineCyclePrev<cr>" },
-      { "<S-l>", "<cmd>BufferLineCycleNext<cr>" },
+      { "<C-[>", "<cmd>BufferLineCyclePrev<cr>" },
+      { "<C-]>", "<cmd>BufferLineCycleNext<cr>" },
     })
   end,
 }
