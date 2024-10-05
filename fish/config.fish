@@ -1,6 +1,10 @@
 set fish_greeting ""
 set --global --export LANG en_EN.UTF-8
 
+if test "$TERM" = "xterm-kitty"
+  alias ssh="kitty +kitten ssh"
+end
+
 alias v "nvim"
 alias t "tmux"
 alias ta "tmux attach"

@@ -4,7 +4,7 @@ alias fish_reload_rc="source ~/.config/fish/config.fish"
 
 alias please "sudo"
 alias m "make"
-alias cat "bat"
+alias cat "bat --plain"
 alias rm "trash"
 alias reveal "open --reveal"
 alias nterm "open . -a iterm"
