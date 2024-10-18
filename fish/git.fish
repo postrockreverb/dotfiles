@@ -1,5 +1,7 @@
 # git aliases
 
+alias g="lazygit"
+
 alias gl="git log"
 
 alias ga="git add"
@@ -25,7 +27,7 @@ alias gds="git diff --cached --stat"
 alias gdn="git diff --name-only origin/master"
 alias gda="git diff --cached --"
 
-alias gclear="git clean -df && git checkout -- ."
+alias gcls="git clean -df && git checkout -- ."
 alias gls="git for-each-ref --sort=committerdate ref/heads/ --format='%(committerdate:short) %(refname:short)'"
 alias gprnm="git branch --merged | egrep -v '(^\*|master|dev|list)' | xargs git branch -d"
 
