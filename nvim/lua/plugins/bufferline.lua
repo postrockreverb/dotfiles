@@ -23,6 +23,8 @@ return {
     wk.add({
       { "<C-[>", "<cmd>BufferLineCyclePrev<cr>" },
       { "<C-]>", "<cmd>BufferLineCycleNext<cr>" },
+      { "<C-A-[>", "<cmd>BufferLineMovePrev<cr>" },
+      { "<C-A-]>", "<cmd>BufferLineMoveNext<cr>" },
     })
   end,
 }

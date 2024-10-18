@@ -32,4 +32,4 @@ vim.opt.scrolloff = 8
 vim.opt.sidescrolloff = 8
 
 -- highlight the current line
-vim.opt.cursorline = true
+vim.opt.cursorline = false
