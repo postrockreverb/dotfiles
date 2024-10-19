@@ -43,7 +43,7 @@ return {
     return {
       on_attach = my_on_attach,
       filters = {
-        dotfiles = false,
+        enable = false,
       },
       disable_netrw = true,
       hijack_cursor = true,
