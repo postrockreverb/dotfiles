@@ -15,4 +15,4 @@ tmux/plugins
 !fish
 !fish/**/*
 fish/ssh.fish
-
+fish/fish_variables/*

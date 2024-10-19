@@ -55,6 +55,22 @@ return {
   },
   config = function(_, opts)
     require("rose-pine").setup(opts)
-    vim.cmd([[colorscheme rose-pine-main]])
+
+    function Dark()
+      vim.cmd([[colorscheme rose-pine-main]])
+    end
+
+    function Light()
+      vim.cmd([[colorscheme rose-pine-dawn]])
+    end
+
+    vim.cmd("command Light silent lua Light()")
+    vim.cmd("command Dark silent lua Dark()")
+
+    if os.getenv("theme") == "light" then
+      Light()
+    else
+      Dark()
+    end
   end,
 }
