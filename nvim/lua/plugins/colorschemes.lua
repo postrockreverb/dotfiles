@@ -3,6 +3,10 @@ return {
   lazy = false,
   priority = 1000,
   name = "rose-pine",
+  config = function(_, opts)
+    require("rose-pine").setup(opts)
+    vim.cmd([[colorscheme rose-pine-main]])
+  end,
   opts = {
     styles = {
       transparency = true,
@@ -53,24 +57,4 @@ return {
       IlluminatedWordWrite = { underline = true, bg = "<color>" },
     },
   },
-  config = function(_, opts)
-    require("rose-pine").setup(opts)
-
-    function Dark()
-      vim.cmd([[colorscheme rose-pine-main]])
-    end
-
-    function Light()
-      vim.cmd([[colorscheme rose-pine-dawn]])
-    end
-
-    vim.cmd("command Light silent lua Light()")
-    vim.cmd("command Dark silent lua Dark()")
-
-    if os.getenv("theme") == "light" then
-      Light()
-    else
-      Dark()
-    end
-  end,
 }

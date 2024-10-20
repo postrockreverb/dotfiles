@@ -3,6 +3,12 @@ return {
   version = "*",
   dependencies = { "nvim-tree/nvim-web-devicons" },
   event = { "VimEnter" },
+  keys = {
+    { "<C-[>", "<cmd>BufferLineCyclePrev<cr>" },
+    { "<C-]>", "<cmd>BufferLineCycleNext<cr>" },
+    { "<C-A-[>", "<cmd>BufferLineMovePrev<cr>" },
+    { "<C-A-]>", "<cmd>BufferLineMoveNext<cr>" },
+  },
   init = function()
     vim.o.termguicolors = true
   end,
@@ -16,15 +22,4 @@ return {
       separator_style = { "", "" },
     },
   },
-  config = function(_, opts)
-    require("bufferline").setup(opts)
-
-    local wk = require("which-key")
-    wk.add({
-      { "<C-[>", "<cmd>BufferLineCyclePrev<cr>" },
-      { "<C-]>", "<cmd>BufferLineCycleNext<cr>" },
-      { "<C-A-[>", "<cmd>BufferLineMovePrev<cr>" },
-      { "<C-A-]>", "<cmd>BufferLineMoveNext<cr>" },
-    })
-  end,
 }
