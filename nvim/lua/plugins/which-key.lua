@@ -7,6 +7,9 @@ return {
   end,
   opts = {
     preset = "helix",
+    icons = {
+      mappings = false,
+    },
   },
   keys = {
     { "<leader>q", "<cmd>quitall<cr>", desc = "Quit" },
