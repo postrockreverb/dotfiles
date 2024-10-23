@@ -1,5 +1,8 @@
 return {
   "folke/zen-mode.nvim",
+  keys = {
+    { "<leader>z", "<cmd>ZenMode<cr>", desc = "Zen" },
+  },
   opts = {
     window = {
       backdrop = 0.95,
@@ -34,12 +37,4 @@ return {
       },
     },
   },
-  config = function(_, opts)
-    require("zen-mode").setup(opts)
-
-    local wk = require("which-key")
-    wk.add({
-      { "<leader>z", "<cmd>ZenMode<cr>", desc = "Zen" },
-    })
-  end,
 }

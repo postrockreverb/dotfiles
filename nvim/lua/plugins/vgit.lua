@@ -20,7 +20,6 @@ return {
 
     local wk = require("which-key")
     wk.add({
-      { "<leader>g", group = "Git" },
       { "<leader>gb", vgit.buffer_gutter_blame_preview, desc = "Blame" },
       { "<leader>gz", vgit.buffer_hunk_reset, desc = "Reset hunk" },
       { "<leader>gZ", vgit.buffer_reset, desc = "Reset buffer" },

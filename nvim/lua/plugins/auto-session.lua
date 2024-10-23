@@ -1,7 +1,11 @@
 return {
   "rmagatti/auto-session",
+  lazy = false,
   dependencies = {
     "nvim-telescope/telescope.nvim",
+  },
+  keys = {
+    { "<leader>t.", "<cmd>SessionSearch<CR>", desc = "Sessions" },
   },
   opts = {
     allowed_dirs = {
@@ -11,13 +15,4 @@ return {
     },
     args_allow_single_directory = false,
   },
-  config = function(_, opts)
-    require("auto-session").setup(opts)
-
-    local wk = require("which-key")
-    wk.add({
-      { "<leader>t", group = "Telescope" },
-      { "<leader>ts", "<cmd>SessionSearch<CR>", desc = "Sessions" },
-    })
-  end,
 }

@@ -14,4 +14,12 @@ return {
     { "<leader>c", "<cmd>bd<cr>", desc = "Close buffer" },
     { "<leader>C", "<cmd>%bd|e#|bd#<cr>", desc = "Close other buffers" },
   },
+  config = function(_, opts)
+    local wk = require("which-key")
+    wk.setup(opts)
+    wk.add({
+      { "<leader>t", group = "Telescope" },
+      { "<leader>g", group = "Git" },
+    })
+  end,
 }

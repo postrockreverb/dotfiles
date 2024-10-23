@@ -12,9 +12,6 @@ return {
     { "<leader>e", "<cmd>NvimTreeToggle<cr>", desc = "Netrw" },
     { "<leader>-", "<cmd>NvimTreeFindFile<cr>", desc = "Focus file" },
   },
-  config = function(_, opts)
-    require("nvim-tree").setup(opts)
-  end,
   opts = function()
     local function my_on_attach(bufnr)
       local api = require("nvim-tree.api")

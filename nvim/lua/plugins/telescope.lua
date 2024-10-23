@@ -9,6 +9,7 @@ end
 return {
   "nvim-telescope/telescope.nvim",
   tag = "0.1.4",
+  event = "VeryLazy",
   dependencies = {
     "nvim-lua/plenary.nvim",
     "jonarrien/telescope-cmdline.nvim",
@@ -60,12 +61,14 @@ return {
 
     local wk = require("which-key")
     wk.add({
-      { "<leader>t", group = "Telescope" },
       { "<leader>tf", with_theme(builtin.find_files, dropdown), desc = "Files" },
       { "<leader>tb", with_theme(builtin.buffers, dropdown), desc = "Buffers" },
-      { "<leader>tg", with_theme(builtin.live_grep, dropdown), desc = "Grep" },
+      { "<leader>t/", with_theme(builtin.live_grep, dropdown), desc = "Grep" },
       { "<leader>tr", with_theme(builtin.oldfiles, dropdown), desc = "Recent files" },
-      { "<leader>td", with_theme(builtin.diagnostics), desc = "Diagnostics" },
+      { "<leader>td", with_theme(builtin.diagnostics, dropdown), desc = "Diagnostics" },
+      { "<leader>ts", with_theme(builtin.lsp_document_symbols, dropdown), desc = "Symbols" },
+      { "<leader>tS", with_theme(builtin.lsp_dynamic_workspace_symbols, dropdown), desc = "Workspace symbols" },
+      { "<leader>tg", with_theme(builtin.git_status, dropdown), desc = "Git files" },
       { "<leader>tl", builtin.resume, desc = "Resume last" },
       { "gr", builtin.lsp_references },
     })
