@@ -9,6 +9,7 @@ return {
       "regex",
     },
     filetypes_denylist = {
+      "NvimTree",
       "neo-tree",
       "dirvish",
       "fugitive",

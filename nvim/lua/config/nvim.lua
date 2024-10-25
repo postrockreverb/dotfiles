@@ -33,3 +33,8 @@ vim.opt.sidescrolloff = 8
 
 -- highlight the current line
 vim.opt.cursorline = false
+
+-- folding
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.foldlevel = 99
