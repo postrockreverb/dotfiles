@@ -36,6 +36,7 @@ return {
           ["<C-j>"] = actions.move_selection_next, -- move to next result
           ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist, -- send selected to quickfixlist
           ["<C-p>"] = layout_actions.toggle_preview,
+          ["<C-c>"] = actions.delete_buffer,
         },
       },
     }
@@ -70,7 +71,7 @@ return {
       { "<leader>tS", with_theme(builtin.lsp_dynamic_workspace_symbols, dropdown), desc = "Workspace symbols" },
       { "<leader>tg", with_theme(builtin.git_status, dropdown), desc = "Git files" },
       { "<leader>tl", builtin.resume, desc = "Resume last" },
-      { "gr", builtin.lsp_references },
+      { "gr", with_theme(builtin.lsp_references, dropdown), desc = "Lsp references" },
     })
   end,
 }

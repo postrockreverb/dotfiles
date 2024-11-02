@@ -37,4 +37,8 @@ vim.opt.cursorline = false
 -- folding
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
-vim.opt.foldlevel = 99
+vim.opt.foldenable = false
+vim.opt.foldlevelstart = 99
+
+-- spelling
+vim.opt.spell = true

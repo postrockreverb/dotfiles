@@ -23,6 +23,8 @@ return {
     wk.add({
       { "<leader>t", group = "Telescope" },
       { "<leader>g", group = "Git" },
+      { "<leader>d", group = "Diagnostics" },
+      { "<leader>a", group = "Code" },
     })
   end,
 }

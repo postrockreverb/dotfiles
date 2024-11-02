@@ -19,20 +19,27 @@ return {
   },
   {
     "williamboman/mason-lspconfig.nvim",
-    config = function()
+    keys = {
+      { "K", vim.lsp.buf.hover },
+      { "gd", vim.lsp.buf.definition },
+      { "<leader>aa", vim.lsp.buf.code_action, desc = "Actions" },
+      { "<leader>do", vim.diagnostic.open_float, desc = "Open float" },
+    },
+    opts = {
+      -- https://github.com/williamboman/mason-lspconfig.nvim?tab=readme-ov-file#available-lsp-servers
+      ensure_installed = {
+        "phpactor",
+        "lua_ls",
+        "svelte",
+        "tailwindcss",
+        "gopls",
+        "ts_ls",
+        "astro",
+      },
+    },
+    config = function(_, opts)
       require("mason").setup()
-      require("mason-lspconfig").setup({
-        -- https://github.com/williamboman/mason-lspconfig.nvim?tab=readme-ov-file#available-lsp-servers
-        ensure_installed = {
-          "phpactor",
-          "lua_ls",
-          "svelte",
-          "tailwindcss",
-          "gopls",
-          "ts_ls",
-          "astro",
-        },
-      })
+      require("mason-lspconfig").setup(opts)
 
       require("lspconfig").phpactor.setup({})
       require("lspconfig").lua_ls.setup({
@@ -67,15 +74,6 @@ return {
       require("lspconfig").gopls.setup({})
       require("lspconfig").ts_ls.setup({})
       require("lspconfig").astro.setup({})
-
-      local wk = require("which-key")
-      wk.add({
-        { "K", vim.lsp.buf.hover },
-        { "gd", vim.lsp.buf.definition },
-        { "<leader>a", vim.lsp.buf.code_action, desc = "Code actions" },
-        { "<leader>d", group = "Diagnostics" },
-        { "<leader>do", vim.diagnostic.open_float, desc = "Open float" },
-      })
     end,
   },
 }
