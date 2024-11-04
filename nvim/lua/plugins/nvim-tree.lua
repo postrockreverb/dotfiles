@@ -40,7 +40,8 @@ return {
     return {
       on_attach = my_on_attach,
       filters = {
-        enable = false,
+        enable = true,
+        custom = { ".DSStore", ".git" },
       },
       disable_netrw = true,
       hijack_cursor = true,
@@ -73,22 +74,24 @@ return {
       renderer = {
         root_folder_label = false,
         highlight_git = true,
-        indent_markers = { enable = true, inline_arrows = true },
+        indent_markers = { enable = true, inline_arrows = false },
         icons = {
           git_placement = "right_align",
+          show = {
+            file = true,
+            folder = true,
+            folder_arrow = false,
+            git = true,
+          },
           glyphs = {
-            folder = {
-              arrow_closed = "", -- arrow when folder is closed
-              arrow_open = "", -- arrow when folder is open
-            },
             git = {
-              unstaged = "",
-              staged = "✓",
+              unstaged = "U",
+              staged = "S",
               unmerged = "",
-              renamed = "➜",
-              untracked = "󰓏",
-              deleted = "",
-              ignored = "◌",
+              renamed = "R",
+              untracked = "?",
+              deleted = "D",
+              ignored = "I",
             },
           },
         },
