@@ -30,6 +30,7 @@ return {
     local actions = require("telescope.actions")
     local layout_actions = require("telescope.actions.layout")
     opts.defaults = {
+      path_display = { "trancate" },
       mappings = {
         i = {
           ["<C-k>"] = actions.move_selection_previous, -- move to prev result
@@ -37,6 +38,7 @@ return {
           ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist, -- send selected to quickfixlist
           ["<C-p>"] = layout_actions.toggle_preview,
           ["<C-c>"] = actions.delete_buffer,
+          ["<C-s>"] = actions.toggle_selection,
         },
       },
     }
