@@ -41,7 +41,7 @@ return {
       on_attach = my_on_attach,
       filters = {
         enable = true,
-        custom = { ".DS_Store", ".git" },
+        custom = { "^.DS_Store$", "^.git$" },
       },
       disable_netrw = true,
       hijack_cursor = true,

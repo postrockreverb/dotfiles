@@ -3,29 +3,22 @@ return {
   dependencies = {
     "nvim-lua/plenary.nvim",
   },
+  event = "VimEnter",
+  keys = {
+    { "<leader>gb", "<cmd>VGit buffer_gutter_blame_preview<cr>", desc = "Blame" },
+    { "<leader>gz", "<cmd>VGit buffer_hunk_reset<cr>", desc = "Reset hunk" },
+    { "<leader>gZ", "<cmd>VGit buffer_reset<cr>", desc = "Reset buffer" },
+    { "<leader>gh", "<cmd>VGit buffer_hunk_preview<cr>", desc = "Preview hunk" },
+    { "<leader>gd", "<cmd>VGit buffer_diff_preview<cr>", desc = "Buffer diff" },
+    { "<leader>gD", "<cmd>VGit project_diff_preview<cr>", desc = "Project diff" },
+  },
   init = function()
     vim.o.updatetime = 300
     vim.wo.signcolumn = "yes"
   end,
   opts = {
     settings = {
-      live_blame = {
-        enabled = false,
-      },
+      live_blame = { enabled = false },
     },
   },
-  config = function(_, opts)
-    local vgit = require("vgit")
-    vgit.setup(opts)
-
-    local wk = require("which-key")
-    wk.add({
-      { "<leader>gb", vgit.buffer_gutter_blame_preview, desc = "Blame" },
-      { "<leader>gz", vgit.buffer_hunk_reset, desc = "Reset hunk" },
-      { "<leader>gZ", vgit.buffer_reset, desc = "Reset buffer" },
-      { "<leader>gh", vgit.buffer_hunk_preview, desc = "Preview hunk" },
-      { "<leader>gd", vgit.buffer_diff_preview, desc = "Buffer diff" },
-      { "<leader>gD", vgit.project_diff_preview, desc = "Project diff" },
-    })
-  end,
 }
