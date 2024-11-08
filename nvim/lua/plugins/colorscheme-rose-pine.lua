@@ -3,10 +3,6 @@ return {
   lazy = false,
   priority = 1000,
   name = "rose-pine",
-  config = function(_, opts)
-    require("rose-pine").setup(opts)
-    vim.cmd([[colorscheme rose-pine-main]])
-  end,
   opts = {
     styles = {
       transparency = true,
@@ -45,7 +41,6 @@ return {
 
     highlight_groups = {
       Number = { fg = "#5BC1A2" },
-      -- LineNr = { fg = "#3B4261" },
       LineNr4 = { fg = "#3B4261" },
       LineNr3 = { fg = "#445464" },
       LineNr2 = { fg = "#5D8E97" },

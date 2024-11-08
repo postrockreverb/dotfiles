@@ -10,7 +10,7 @@ alias reveal "open --reveal"
 alias nterm "open . -a iterm"
 
 # eza aliases
-alias ll "eza --long --git --icons=always --no-user --no-permissions --no-time"
+alias ll "eza --long --git --icons=always --no-user --no-permissions --no-time --group-directories-first"
 alias lla "ll -a"
 
 # broot aliases
