@@ -74,6 +74,9 @@ return {
       { "<leader>tg", with_theme(builtin.git_status, dropdown), desc = "Git files" },
       { "<leader>tl", builtin.resume, desc = "Resume last" },
       { "gr", with_theme(builtin.lsp_references, dropdown), desc = "Lsp references" },
+      { "gi", with_theme(builtin.lsp_implementations, dropdown), desc = "Lsp references" },
+      { "gd", with_theme(builtin.lsp_definitions, dropdown), desc = "Lsp references" },
+      { "gD", with_theme(builtin.lsp_type_definitions, dropdown), desc = "Lsp references" },
     })
   end,
 }

@@ -46,6 +46,10 @@ return {
       LineNr2 = { fg = "#5D8E97" },
       LineNr1 = { fg = "#7DAEB9" },
       LineNr0 = { fg = "#bDeEf9", bold = true },
+
+      IlluminatedWordRead = { underline = true, bg = "<color>" },
+      IlluminatedWordText = { underline = true, bg = "<color>" },
+      IlluminatedWordWrite = { underline = true, bg = "<color>" },
     },
   },
 }

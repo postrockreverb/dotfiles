@@ -2,7 +2,6 @@ return {
   "williamboman/mason-lspconfig.nvim",
   keys = {
     { "K", vim.lsp.buf.hover },
-    { "gd", vim.lsp.buf.definition },
     { "<leader>a", vim.lsp.buf.code_action, desc = "Actions", mode = { "n", "v" } },
     { "<leader>do", vim.diagnostic.open_float, desc = "Open float" },
   },
