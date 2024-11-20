@@ -21,10 +21,7 @@ return {
       { "<leader>q", group = "Quickfix list" },
 
       { "<leader>n", "<cmd>noh<cr>", desc = "No highlight" },
-      { "<leader>c", "<cmd>bd<cr>", desc = "Close buffer" },
       { "<leader>C", "<cmd>%bd|e#|bd#<cr>", desc = "Close other buffers" },
-      { "[b", "<cmd>bprev<cr>", desc = "Previous buffer" },
-      { "]b", "<cmd>bnext<cr>", desc = "Next buffer" },
 
       { "<leader>ql", "<cmd>copen<cr>", desc = "Open" },
       { "[q", "<cmd>cprev<cr>zz", desc = "Previous quickfix list item" },
