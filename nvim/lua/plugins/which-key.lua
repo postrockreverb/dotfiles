@@ -15,19 +15,51 @@ return {
     local wk = require("which-key")
     wk.setup(opts)
     wk.add({
+      -- groups
       { "<leader>t", group = "Telescope" },
       { "<leader>g", group = "Git" },
       { "<leader>d", group = "Diagnostics" },
       { "<leader>q", group = "Quickfix list" },
 
+      -- misc
       { "<leader>n", "<cmd>noh<cr>", desc = "No highlight" },
       { "<leader>C", "<cmd>%bd|e#|bd#<cr>", desc = "Close other buffers" },
 
+      -- quickfix list
       { "<leader>ql", "<cmd>copen<cr>", desc = "Open" },
       { "[q", "<cmd>cprev<cr>zz", desc = "Previous quickfix list item" },
       { "]q", "<cmd>cnext<cr>zz", desc = "Next quickfix list item" },
       { "[l", "<cmd>lprev<cr>zz", desc = "Previous quickfix list location" },
       { "]l", "<cmd>lnext<cr>zz", desc = "Next quickfix list location" },
+
+      -- snippets
+      {
+        mode = { "i", "s" },
+        {
+          "<Tab>",
+          function()
+            if vim.snippet.active({ direction = 1 }) then
+              vim.schedule(function()
+                vim.snippet.jump(1)
+              end)
+              return
+            end
+            return "<Tab>"
+          end,
+        },
+        {
+          "<S-Tab>",
+          function()
+            if vim.snippet.active({ direction = -1 }) then
+              vim.schedule(function()
+                vim.snippet.jump(-1)
+              end)
+              return
+            end
+            return "<S-Tab>"
+          end,
+        },
+      },
     })
   end,
 }
