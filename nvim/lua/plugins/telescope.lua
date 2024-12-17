@@ -1,7 +1,8 @@
-local function with_theme(picker, theme)
+local function with_theme(picker, theme, add_opts)
+  add_opts = add_opts or {}
   return function(opts)
     opts = opts or {}
-    opts = vim.tbl_deep_extend("force", theme, opts)
+    opts = vim.tbl_deep_extend("force", theme, opts, add_opts)
     picker(opts)
   end
 end
@@ -30,7 +31,6 @@ return {
     local actions = require("telescope.actions")
     local layout_actions = require("telescope.actions.layout")
     opts.defaults = {
-      path_display = { "trancate" },
       mappings = {
         i = {
           ["<C-k>"] = actions.move_selection_previous, -- move to prev result
@@ -73,7 +73,7 @@ return {
       { "<leader>tS", with_theme(builtin.lsp_dynamic_workspace_symbols, dropdown), desc = "Workspace symbols" },
       { "<leader>tg", with_theme(builtin.git_status, dropdown), desc = "Git files" },
       { "<leader>tl", builtin.resume, desc = "Resume last" },
-      { "gr", with_theme(builtin.lsp_references, dropdown), desc = "Lsp references" },
+      { "gr", with_theme(builtin.lsp_references, dropdown, { show_line = false }), desc = "Lsp references" },
       { "gi", with_theme(builtin.lsp_implementations, dropdown), desc = "Lsp references" },
       { "gd", with_theme(builtin.lsp_definitions, dropdown), desc = "Lsp references" },
       { "gD", with_theme(builtin.lsp_type_definitions, dropdown), desc = "Lsp references" },

@@ -41,4 +41,4 @@ vim.opt.foldenable = false
 vim.opt.foldlevelstart = 99
 
 -- spelling
-vim.opt.spell = true
+vim.opt.spell = false
