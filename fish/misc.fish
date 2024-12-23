@@ -3,6 +3,7 @@
 alias fish_reload_rc="source ~/.config/fish/config.fish"
 
 alias please "sudo"
+alias make "gmake"
 alias m "make"
 alias cat "bat --plain"
 alias rm "trash"

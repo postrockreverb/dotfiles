@@ -34,13 +34,14 @@ return {
       vim.keymap.set("n", "<bs>", api.tree.change_root_to_parent, opts("Up"))
       vim.keymap.set("n", "q", function() end, opts("Noop"))
       vim.keymap.set("n", "tf", custom_callback("launch_find_files"), opts("Telescope Files"))
-      vim.keymap.set("n", "tg", custom_callback("launch_live_grep"), opts("Telescope Grep"))
+      vim.keymap.set("n", "t/", custom_callback("launch_live_grep"), opts("Telescope Grep"))
     end
 
     return {
       on_attach = my_on_attach,
       filters = {
         enable = true,
+        git_ignored = false,
         custom = { "^.DS_Store$", "^.git$" },
       },
       disable_netrw = true,

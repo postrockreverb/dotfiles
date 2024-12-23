@@ -31,35 +31,6 @@ return {
       { "]q", "<cmd>cnext<cr>zz", desc = "Next quickfix list item" },
       { "[l", "<cmd>lprev<cr>zz", desc = "Previous quickfix list location" },
       { "]l", "<cmd>lnext<cr>zz", desc = "Next quickfix list location" },
-
-      -- snippets
-      {
-        mode = { "i", "s" },
-        {
-          "<Tab>",
-          function()
-            if vim.snippet.active({ direction = 1 }) then
-              vim.schedule(function()
-                vim.snippet.jump(1)
-              end)
-              return
-            end
-            return "<Tab>"
-          end,
-        },
-        {
-          "<S-Tab>",
-          function()
-            if vim.snippet.active({ direction = -1 }) then
-              vim.schedule(function()
-                vim.snippet.jump(-1)
-              end)
-              return
-            end
-            return "<S-Tab>"
-          end,
-        },
-      },
     })
   end,
 }

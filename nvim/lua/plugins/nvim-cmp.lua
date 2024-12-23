@@ -20,10 +20,29 @@ return {
     cmp.register_source("snp", snp)
 
     cmp.setup({
+      snippet = {
+        expand = function(args)
+          vim.snippet.expand(args.body)
+        end,
+      },
       mapping = cmp.mapping.preset.insert({
         ["<CR>"] = cmp.mapping.confirm({ select = true }),
         ["<C-j>"] = cmp.mapping.select_next_item(),
         ["<C-k>"] = cmp.mapping.select_prev_item(),
+        ["<Tab>"] = cmp.mapping(function(fallback)
+          if vim.snippet.active({ direction = 1 }) then
+            vim.snippet.jump(1)
+          else
+            fallback()
+          end
+        end, { "i", "s" }),
+        ["<S-Tab>"] = cmp.mapping(function(fallback)
+          if vim.snippet.active({ direction = -1 }) then
+            vim.snippet.jump(-1)
+          else
+            fallback()
+          end
+        end, { "i", "s" }),
       }),
       sources = cmp.config.sources({
         { name = "nvim_lsp" }, -- lsp
