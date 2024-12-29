@@ -22,7 +22,6 @@ return {
       { "<leader>q", group = "Quickfix list" },
 
       -- misc
-      { "<leader>n", "<cmd>noh<cr>", desc = "No highlight" },
       { "<leader>C", "<cmd>%bd|e#|bd#<cr>", desc = "Close other buffers" },
 
       -- quickfix list
