@@ -2,8 +2,6 @@
 
 alias g="lazygit"
 
-alias gl="git log"
-
 alias ga="git add"
 
 alias gp="git push"
@@ -23,12 +21,13 @@ alias gca="git commit --amend"
 alias gcm="git commit -m"
 
 alias gd="git diff"
+alias gda="git diff --cached --"
 alias gds="git diff --cached --stat"
 alias gdn="git diff --name-only origin/master"
-alias gda="git diff --cached --"
+
+alias gs="git status -sb"
+alias gl="git log --graph --pretty=format:\"%C(red)%h%C(reset)%C(yellow)%d%Creset %s %C(green italic)(%cr)%C(reset) %C(blue)%an%C(reset) %C(white dim)%GK %C(reset)\""
+alias gls="git for-each-ref --sort=committerdate ref/heads/ --format='%(committerdate:short) %(refname:short)'"
 
 alias gcls="git clean -df && git checkout -- ."
-alias gls="git for-each-ref --sort=committerdate ref/heads/ --format='%(committerdate:short) %(refname:short)'"
-alias gprnm="git branch --merged | egrep -v '(^\*|master|dev|list)' | xargs git branch -d"
-
-alias gs="git status"
+alias gprunemegred="git branch --merged | egrep -v '(^\*|master|dev|list)' | xargs git branch -d"

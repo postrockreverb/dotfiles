@@ -1,6 +1,8 @@
 set fish_greeting ""
 set --global --export LANG en_EN.UTF-8
 
+set HOMEBREW_AUTO_UPDATE_SECS 1209600 # two weeks
+
 if test "$TERM" = "xterm-kitty"
   alias ssh="kitty +kitten ssh"
 end
