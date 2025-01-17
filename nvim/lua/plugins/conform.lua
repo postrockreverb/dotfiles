@@ -36,6 +36,7 @@ return {
         go = { "gofumpt", "goimports" },
         markdown = { "prettierd", "prettier" },
         astro = { "prettierd", "prettier" },
+        sh = { "shfmt" },
       },
     },
   },

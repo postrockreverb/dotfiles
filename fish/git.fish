@@ -25,7 +25,7 @@ alias gda="git diff --cached --"
 alias gds="git diff --cached --stat"
 alias gdn="git diff --name-only origin/master"
 
-alias gs="git status -sb"
+alias gs="git status"
 alias gl="git log --graph --pretty=format:\"%C(red)%h%C(reset)%C(yellow)%d%Creset %s %C(green italic)(%cr)%C(reset) %C(blue)%an%C(reset) %C(white dim)%GK %C(reset)\""
 alias gls="git for-each-ref --sort=committerdate ref/heads/ --format='%(committerdate:short) %(refname:short)'"
 

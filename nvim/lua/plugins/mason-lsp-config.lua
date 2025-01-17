@@ -15,7 +15,8 @@ return {
       "gopls",
       "ts_ls",
       "astro",
-      "eslint"
+      "eslint",
+      "dockerls",
     },
   },
   config = function(_, opts)
@@ -56,5 +57,6 @@ return {
     require("lspconfig").ts_ls.setup({})
     require("lspconfig").astro.setup({})
     require("lspconfig").eslint.setup({})
+    require("lspconfig").dockerls.setup({})
   end,
 }
