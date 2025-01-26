@@ -2,17 +2,20 @@
 !.gitignore
 **/.DS_Store
 
+!fish
+!fish/**/*
+fish/ssh.fish
+fish/fish_variables
+
+!kitty
+!kitty/**/*
+
+!lazygit
+!lazygit/**/*
+
 !nvim
 !nvim/**/*
 
 !tmux
 !tmux/**/*
 tmux/plugins
-
-!kitty
-!kitty/**/*
-
-!fish
-!fish/**/*
-fish/ssh.fish
-fish/fish_variables

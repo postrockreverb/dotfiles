@@ -1,0 +1,7 @@
+gui:
+  scrollHeight: 8
+  scrollOffMargin: 4
+
+git:
+  autoFetch: false
+  fetchAll: false
