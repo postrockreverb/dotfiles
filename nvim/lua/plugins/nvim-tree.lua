@@ -24,6 +24,9 @@ return {
       api.config.mappings.default_on_attach(bufnr)
 
       -- custom mappings
+      vim.keymap.set("n", "h", api.node.navigate.parent, opts("Parent"))
+      vim.keymap.set("n", "<cr>", api.node.open.no_window_picker, opts("Open: No Window Picker"))
+      vim.keymap.set("n", "<bs>", api.node.navigate.parent, opts("Parent"))
       vim.keymap.set("n", "d", api.fs.trash, opts("Trash"))
       vim.keymap.set("n", "y", api.fs.copy.node, opts("Copy"))
       vim.keymap.set("n", "c", api.fs.copy.filename, opts("Copy Name"))
@@ -31,7 +34,7 @@ return {
       vim.keymap.set("n", "s", api.tree.search_node, opts("Search"))
       vim.keymap.set("n", "<esc>", api.tree.close, opts("Close"))
       vim.keymap.set("n", ".", api.tree.change_root_to_node, opts("CD"))
-      vim.keymap.set("n", "<bs>", api.tree.change_root_to_parent, opts("Up"))
+      vim.keymap.set("n", ",", api.tree.change_root_to_parent, opts("Up"))
       vim.keymap.set("n", "q", function() end, opts("Noop"))
       vim.keymap.set("n", "tf", custom_callback("launch_find_files"), opts("Telescope Files"))
       vim.keymap.set("n", "t/", custom_callback("launch_live_grep"), opts("Telescope Grep"))
