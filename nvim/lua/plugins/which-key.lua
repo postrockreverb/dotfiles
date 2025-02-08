@@ -20,9 +20,11 @@ return {
       { "<leader>g", group = "Git" },
       { "<leader>d", group = "Diagnostics" },
       { "<leader>q", group = "Quickfix list" },
+      { "<leader>b", group = "Buffers" },
 
-      -- misc
-      { "<leader>C", "<cmd>%bd|e#|bd#<cr>", desc = "Close other buffers" },
+      -- buffers
+      { "<leader>bD", "<cmd>%bd|e#|bd#<cr>", desc = "Close other" },
+      { "<leader>bd", "<cmd>bp|sp|bn|bd<cr>", desc = "Close current" },
 
       -- quickfix list
       { "<leader>ql", "<cmd>copen<cr>", desc = "Open" },
