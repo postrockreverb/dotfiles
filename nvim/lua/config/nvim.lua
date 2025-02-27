@@ -21,12 +21,16 @@ vim.opt.expandtab = true
 vim.opt.fillchars:append("eob: ")
 
 -- netrw settings
+vim.g.netrw_plugin = 1
 vim.g.netrw_banner = 0
-vim.g.netrw_browse_split = 4
-vim.g.netrw_altv = 1
-vim.g.netrw_winsize = 25
-vim.g.netrw_liststyle = 3
-vim.g.netrw_fastbrowse = 0
+vim.g.netrw_liststyle = 0
+vim.g.netrw_fastbrowse = 2
+vim.g.netrw_browse_split = 0
+vim.g.netrw_list_hide = "^\\(\\.git\\|\\.DS_Store\\)"
+vim.g.netrw_hide = 1
+vim.g.netrw_localcopydircmd = "cp -r"
+vim.g.netrw_localmkdir = "mkdir -p"
+vim.g.netrw_localrmdir = "rm -r"
 
 -- no line wrap
 vim.wo.wrap = false

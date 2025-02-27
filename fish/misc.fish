@@ -5,10 +5,14 @@ alias fish_reload_rc="source ~/.config/fish/config.fish"
 alias please "sudo"
 alias make "gmake"
 alias m "make"
-alias cat "bat --plain"
 alias rm "trash"
 alias reveal "open --reveal"
 alias nterm "open . -a iterm"
+
+# bat aliases
+set -xg BAT_THEME_DARK rose-pine
+set -xg BAT_THEME_LIGHT rose-pine-dawn
+alias cat "bat --plain"
 
 # eza aliases
 alias ll "eza --long --git --icons=always --no-user --no-permissions --no-time --group-directories-first"

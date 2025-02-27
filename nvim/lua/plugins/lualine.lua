@@ -1,19 +1,16 @@
 return {
   "nvim-lualine/lualine.nvim",
-  dependencies = { "nvim-tree/nvim-web-devicons" },
   opts = {
     options = {
+      icons_enabled = false,
       globalstatus = true,
-      disabled_filetypes = {
-        statusline = { "NvimTree" },
-      },
       component_separators = { left = "", right = "" },
       section_separators = { left = "", right = "" },
     },
     sections = {
       lualine_a = {},
       lualine_b = {
-        { "buffers" },
+        { "buffers", mode = 4 },
       },
       lualine_c = {
         { "diagnostics", symbols = { error = "E", warn = "W", info = "I", hint = "H" } },
