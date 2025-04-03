@@ -32,6 +32,10 @@ return {
       { "]q", "<cmd>cnext<cr>zz", desc = "Next quickfix list item" },
       { "[l", "<cmd>lprev<cr>zz", desc = "Previous quickfix list location" },
       { "]l", "<cmd>lnext<cr>zz", desc = "Next quickfix list location" },
+
+      -- rename
+      { "<leader>r", require("plugins.utils.renamer").rename_append, desc = "Rename append" },
+      { "<leader>R", require("plugins.utils.renamer").rename_insert, desc = "Rename insert" },
     })
   end,
 }
