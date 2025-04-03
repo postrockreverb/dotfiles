@@ -1,5 +1,6 @@
 set fish_greeting ""
 
+set -x XDG_CONFIG_HOME "$HOME/.config"
 set HOMEBREW_AUTO_UPDATE_SECS 1209600 # two weeks
 
 if test "$TERM" = "xterm-kitty"
@@ -9,8 +10,6 @@ end
 alias v "nvim"
 alias t "tmux"
 alias ta "tmux attach"
-
-alias lv "/Users/yermac/.local/bin/lvim"
 
 source ~/.config/fish/prompt.fish
 source ~/.config/fish/ssh.fish

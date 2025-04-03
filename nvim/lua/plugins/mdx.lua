@@ -3,6 +3,7 @@ return {
   config = true,
   dependencies = { "nvim-treesitter/nvim-treesitter" },
   ft = "mdx",
+  event = { "BufReadPost", "BufNewFile" },
   init = function()
     vim.filetype.add({
       extension = {

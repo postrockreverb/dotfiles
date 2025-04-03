@@ -9,10 +9,7 @@ return {
     skip_confirm_for_simple_edits = false,
     prompt_save_on_select_new_entry = true,
     keymaps = {
-      ["<C-w>q"] = {
-        "actions.close",
-        mode = "n",
-      },
+      ["<C-w>q"] = { "actions.close", mode = "n" },
       ["<leader>tg"] = {
         function()
           _G.live_grep({ cwd = require("oil").get_current_dir() })

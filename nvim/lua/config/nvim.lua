@@ -13,6 +13,7 @@ vim.opt.relativenumber = true
 vim.opt.shiftwidth = 2
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
+vim.opt.smartindent = true
 
 -- use number of spaces to insert a <Tab>
 vim.opt.expandtab = true

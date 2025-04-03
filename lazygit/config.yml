@@ -5,3 +5,6 @@ gui:
 git:
   autoFetch: false
   fetchAll: false
+  paging:
+    colorArg: always
+    pager: delta --syntax-theme=rose-pine --paging=never

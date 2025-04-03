@@ -7,7 +7,6 @@ alias make "gmake"
 alias m "make"
 alias rm "trash"
 alias reveal "open --reveal"
-alias nterm "open . -a iterm"
 
 # bat aliases
 set -xg BAT_THEME_DARK rose-pine
@@ -17,12 +16,6 @@ alias cat "bat --plain"
 # eza aliases
 alias ll "eza --long --git --icons=always --no-user --no-permissions --no-time --group-directories-first"
 alias lla "ll -a"
-
-# broot aliases
-alias br "broot"
-alias brw "br -w"
-alias mc "br -w"
-alias brll "br -w -sdp"
 
 # sleep aliases
 alias sleep_in "sudo shutdown -s"
@@ -38,5 +31,6 @@ alias vpn "please openvpn --config"
 alias vpnj "please openvpn --config /usr/local/etc/openvpn/client.ovpn"
 
 # other utilities
+alias glow glow
 alias rg rg
 alias fd fd
