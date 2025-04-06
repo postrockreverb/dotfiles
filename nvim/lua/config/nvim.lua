@@ -14,12 +14,18 @@ vim.opt.shiftwidth = 2
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
 vim.opt.smartindent = true
-
--- use number of spaces to insert a <Tab>
 vim.opt.expandtab = true
+
+-- splits
+vim.opt.splitbelow = true
+vim.opt.splitright = true
 
 -- not display a ~ for blank lines
 vim.opt.fillchars:append("eob: ")
+
+-- search
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
 
 -- netrw settings
 vim.g.netrw_plugin = 1
@@ -51,3 +57,25 @@ vim.opt.foldtext = require("config.foldtext")
 
 -- spelling
 vim.opt.spell = false
+
+-- files
+vim.opt.undofile = true
+vim.opt.backup = false
+vim.opt.swapfile = false
+
+-- langmap
+local function escape(str)
+  local escape_chars = [[;,."|\]]
+  return vim.fn.escape(str, escape_chars)
+end
+
+local en = [[`qwertyuiop[]asdfghjkl;'zxcvbnm]]
+local ru = [[ёйцукенгшщзхъфывапролджэячсмить]]
+local en_shift = [[~QWERTYUIOP{}ASDFGHJKL:"ZXCVBNM<>]]
+local ru_shift = [[ËЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ]]
+local langmap = vim.fn.join({
+  escape(ru_shift) .. ";" .. escape(en_shift),
+  escape(ru) .. ";" .. escape(en),
+}, ",")
+
+vim.opt.langmap = langmap

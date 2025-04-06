@@ -103,7 +103,7 @@ function HighlightedFoldtext()
     end
   end
 
-  table.insert(result, { " ", "FoldedText" })
+  table.insert(result, { " ", "" })
 
   return result
 end
