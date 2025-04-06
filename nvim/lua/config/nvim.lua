@@ -53,7 +53,6 @@ vim.opt.cursorline = false
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.foldlevelstart = 99
-vim.opt.foldtext = require("config.foldtext")
 
 -- spelling
 vim.opt.spell = false
