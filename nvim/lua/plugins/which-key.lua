@@ -23,7 +23,7 @@ return {
       { "<leader>b", group = "Buffers" },
 
       -- buffers
-      { "<leader>bD", "<cmd>%bd|e#|bd#<cr>", desc = "Close other" },
+      { "<leader>bD", require("plugins.utils.buffers").clear_hidden, desc = "Close other" },
       { "<leader>bd", "<cmd>bp|sp|bn|bd<cr>", desc = "Close current" },
 
       -- quickfix list

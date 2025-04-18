@@ -98,8 +98,8 @@ local function scan_paths(search_paths, filename)
   return result
 end
 
-M = {}
-function M.source(search_paths)
+local m = {}
+function m.source(search_paths)
   if not search_paths then
     return {}
   end
@@ -118,4 +118,4 @@ function M.source(search_paths)
   return cmp_source
 end
 
-return M
+return m

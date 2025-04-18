@@ -1,6 +1,6 @@
-local M = {}
+local m = {}
 
-function M.rename_insert()
+function m.rename_insert()
   local new_name = vim.fn.input("Rename: ")
   if new_name == "" then
     return
@@ -9,7 +9,7 @@ function M.rename_insert()
   vim.lsp.buf.rename(new_name)
 end
 
-function M.rename_append()
+function m.rename_append()
   local current_word = vim.fn.expand("<cword>")
 
   local new_name = vim.fn.input("Rename: ", current_word)
@@ -20,4 +20,4 @@ function M.rename_append()
   vim.lsp.buf.rename(new_name)
 end
 
-return M
+return m

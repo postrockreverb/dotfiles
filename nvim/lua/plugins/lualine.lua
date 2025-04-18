@@ -10,7 +10,7 @@ return {
     sections = {
       lualine_a = {},
       lualine_b = {
-        { "buffers", mode = 4 },
+        { "buffers" },
       },
       lualine_c = {
         { "diagnostics", symbols = { error = "E", warn = "W", info = "I", hint = "H" } },
