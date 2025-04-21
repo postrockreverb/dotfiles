@@ -103,7 +103,9 @@ local function tm_hl_scope_settings(group)
   return settings
 end
 
-local convert_to_tmtheme = function()
+local m = {}
+
+function m.convert()
   local colorscheme = vim.g.colors_name or "default"
 
   local settings = ""
@@ -122,6 +124,9 @@ local convert_to_tmtheme = function()
 
   local visual = vim.api.nvim_get_hl_by_name("Visual", true)
   settings = settings .. tm_entry("selection", string.format("#%06x", visual.background))
+
+  local linenr = vim.api.nvim_get_hl_by_name("LineNr", true)
+  settings = settings .. tm_entry("gutterForeground", string.format("#%06x", linenr.foreground))
 
   local scopes = ""
   scopes = scopes .. tm_settings(settings)
@@ -178,4 +183,4 @@ local convert_to_tmtheme = function()
   end
 end
 
-vim.api.nvim_create_user_command("ConvertToTmTheme", convert_to_tmtheme, { nargs = 0 })
+return m

@@ -1,6 +1,10 @@
 *
 !.gitignore
 **/.DS_Store
+.DS_Store
+
+!bat
+!bat/**/*
 
 !fish
 !fish/**/*
