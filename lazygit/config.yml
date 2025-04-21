@@ -7,4 +7,4 @@ git:
   fetchAll: false
   paging:
     colorArg: always
-    pager: delta --syntax-theme=rose-pine --paging=never
+    pager: delta --paging=never

@@ -10,6 +10,7 @@
 !fish/**/*
 fish/ssh.fish
 fish/fish_variables
+fish/completions
 
 !kitty
 !kitty/**/*

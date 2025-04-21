@@ -13,8 +13,8 @@ return {
     },
     previewers = {
       bat = {
-        theme = "rose-pine",
-        args = "--color=always --style=numbers",
+        theme = vim.g.shared_theme,
+        args = "--color=always --style=numbers --tabs=2",
       },
       git_diff = {
         pager = false,
@@ -61,7 +61,7 @@ return {
       { "<leader>t/", fzf.live_grep, desc = "Grep" },
       { "<leader>tr", fzf.oldfiles, desc = "Recent files" },
       { "<leader>td", fzf.diagnostics_document, desc = "Diagnostics" },
-      { "<leader>tD", fzf.diagnostics_workspace, desc = "Wprkspace diagnostics" },
+      { "<leader>tD", fzf.diagnostics_workspace, desc = "Workspace diagnostics" },
       { "<leader>ts", fzf.lsp_document_symbols, desc = "Symbols" },
       { "<leader>tS", fzf.lsp_live_workspace_symbols, desc = "Workspace symbols" },
       { "<leader>tg", fzf.git_status, desc = "Git files" },

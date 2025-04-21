@@ -7,19 +7,19 @@ if test "$TERM" = "xterm-kitty"
   alias ssh="kitty +kitten ssh"
 end
 
-alias v "nvim"
-alias t "tmux"
-alias ta "tmux attach"
+alias fish_reload_rc="source ~/.config/fish/config.fish"
 
 source ~/.config/fish/prompt.fish
-source ~/.config/fish/ssh.fish
 source ~/.config/fish/git.fish
-source ~/.config/fish/pls.fish
-source ~/.config/fish/misc.fish
+source ~/.config/fish/lsp.fish
+source ~/.config/fish/tools.fish
+
+if test -f ~/.config/fish/ssh.fish
+  source ~/.config/fish/ssh.fish
+end
 
 zoxide init fish | source
 
 if status is-interactive
     # Commands to run in interactive sessions can go here
-    # clear && neofetch
 end

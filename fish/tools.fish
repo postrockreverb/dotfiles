@@ -1,16 +1,18 @@
-# misc aliases
+# nvim aliases
+alias v "nvim"
 
-alias fish_reload_rc="source ~/.config/fish/config.fish"
-
-alias please "sudo"
+# make aliases
 alias make "gmake"
 alias m "make"
+
+# trash aliases
 alias rm "trash"
+
+# reveal aliases
 alias reveal "open --reveal"
 
 # bat aliases
-set -xg BAT_THEME_DARK rose-pine
-set -xg BAT_THEME_LIGHT rose-pine-dawn
+export BAT_THEME=$SHARED_THEME
 alias cat "bat --plain"
 
 # eza aliases
@@ -21,16 +23,19 @@ alias lla "ll -a"
 alias sleep_in "sudo shutdown -s"
 alias sleep_cancel "sudo pkill shutdown"
 
-# battery
+# battery aliases
 alias blim "sudo bclm write 80"
 alias bunlim "sudo bclm write 100"
 alias bget "bclm read"
 
-# ovpn aliases
-alias vpn "please openvpn --config"
-alias vpnj "please openvpn --config /usr/local/etc/openvpn/client.ovpn"
-
-# other utilities
+# glow aliases
 alias glow glow
+
+# rg aliases
 alias rg rg
+
+# fd aliases
 alias fd fd
+
+# delta aliases
+alias delta delta
