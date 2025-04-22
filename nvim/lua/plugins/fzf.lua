@@ -17,7 +17,7 @@ return {
         args = "--color=always --style=numbers --tabs=2",
       },
       git_diff = {
-        pager = false,
+        pager = "delta --color-only",
       },
     },
     fzf_opts = {

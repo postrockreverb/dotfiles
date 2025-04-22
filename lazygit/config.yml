@@ -7,4 +7,4 @@ git:
   fetchAll: false
   paging:
     colorArg: always
-    pager: delta --paging=never
+    pager: delta --paging=never --color-only

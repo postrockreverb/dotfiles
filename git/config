@@ -1,0 +1,18 @@
+[user]
+	name = Alexandr Yermak
+	email = ayermak@protonmail.ch
+[core]
+	excludesFile = ~/.config/git/.gitignore_global
+	pager = delta --paging=always --color-only
+[push]
+	autoSetupRemote = true
+[merge]
+  conflictstyle = zdiff3
+[diff]
+	tool = delta
+[difftool]
+  prompt = false
+[interactive]
+  diffFilter = delta --color-only
+[delta]
+  navigate = true  # use n and N to move between diff sections

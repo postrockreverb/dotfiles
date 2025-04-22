@@ -12,6 +12,9 @@ fish/ssh.fish
 fish/fish_variables
 fish/completions
 
+!git
+!git/**/*
+
 !kitty
 !kitty/**/*
 
