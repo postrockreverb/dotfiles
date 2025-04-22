@@ -27,15 +27,3 @@ alias sleep_cancel "sudo pkill shutdown"
 alias blim "sudo bclm write 80"
 alias bunlim "sudo bclm write 100"
 alias bget "bclm read"
-
-# glow aliases
-alias glow glow
-
-# rg aliases
-alias rg rg
-
-# fd aliases
-alias fd fd
-
-# delta aliases
-alias delta delta

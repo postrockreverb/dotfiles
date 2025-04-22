@@ -8,7 +8,7 @@
 
 !fish
 !fish/**/*
-fish/ssh.fish
+fish/local.fish
 fish/fish_variables
 fish/completions
 

@@ -14,8 +14,8 @@ source ~/.config/fish/git.fish
 source ~/.config/fish/lsp.fish
 source ~/.config/fish/tools.fish
 
-if test -f ~/.config/fish/ssh.fish
-  source ~/.config/fish/ssh.fish
+if test -f ~/.config/fish/local.fish
+  source ~/.config/fish/local.fish
 end
 
 zoxide init fish | source
