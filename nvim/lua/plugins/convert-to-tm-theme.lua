@@ -6,6 +6,13 @@ return {
   cmd = cmd,
   config = function()
     local tm = require("plugins.local.convert-to-tm-theme")
-    vim.api.nvim_create_user_command(cmd, tm.convert, { nargs = 0 })
+
+    local convert = function()
+      local colorscheme = vim.g.colors_name or "colorscheme"
+      local path = vim.fn.expand("~/.config/bat/themes/" .. colorscheme .. ".tmTheme")
+      tm.convert(path)
+    end
+
+    vim.api.nvim_create_user_command(cmd, convert, { nargs = 0 })
   end,
 }

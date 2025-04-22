@@ -105,7 +105,7 @@ end
 
 local m = {}
 
-function m.convert()
+function m.convert(path)
   local colorscheme = vim.g.colors_name or "default"
 
   local settings = ""
@@ -165,7 +165,6 @@ function m.convert()
   scopes = scopes .. tm_scope("invalid.deprecated", tm_hl_scope_settings("DiagnosticDeprecated"))
   local content = tm_create(colorscheme, scopes)
 
-  local path = vim.fn.expand("~/.config/bat/themes/" .. colorscheme .. ".tmTheme")
   if io.open(path, "r") then
     local choice = vim.fn.confirm("Overwrite " .. path .. "?", "&Yes\n&No", 2)
     if choice == 2 then
