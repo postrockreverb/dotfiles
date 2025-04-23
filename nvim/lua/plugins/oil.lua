@@ -3,6 +3,9 @@ return {
   init = function()
     vim.api.nvim_create_user_command("Ex", "Oil", { nargs = "?" })
   end,
+  cmd = {
+    "Oil",
+  },
   opts = {
     columns = {},
     delete_to_trash = true,
@@ -10,9 +13,9 @@ return {
     prompt_save_on_select_new_entry = true,
     keymaps = {
       ["<C-w>q"] = { "actions.close", mode = "n" },
-      ["<leader>tg"] = {
+      ["<leader>t/"] = {
         function()
-          _G.live_grep({ cwd = require("oil").get_current_dir() })
+          require("fzf-lua").live_grep({ cwd = require("oil").get_current_dir() })
         end,
         mode = "n",
         nowait = true,
@@ -20,7 +23,7 @@ return {
       },
       ["<leader>tf"] = {
         function()
-          _G.find_files({ cwd = require("oil").get_current_dir() })
+          require("fzf-lua").files({ cwd = require("oil").get_current_dir() })
         end,
         mode = "n",
         nowait = true,

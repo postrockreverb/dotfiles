@@ -53,23 +53,21 @@ return {
     }
 
     fzf.setup(opts)
-
-    local wk = require("which-key")
-    wk.add({
-      { "<leader>tf", fzf.files, desc = "Files" },
-      { "<leader>tb", fzf.buffers, desc = "Buffers" },
-      { "<leader>t/", fzf.live_grep, desc = "Grep" },
-      { "<leader>tr", fzf.oldfiles, desc = "Recent files" },
-      { "<leader>td", fzf.diagnostics_document, desc = "Diagnostics" },
-      { "<leader>tD", fzf.diagnostics_workspace, desc = "Workspace diagnostics" },
-      { "<leader>ts", fzf.lsp_document_symbols, desc = "Symbols" },
-      { "<leader>tS", fzf.lsp_live_workspace_symbols, desc = "Workspace symbols" },
-      { "<leader>tg", fzf.git_status, desc = "Git files" },
-      { "<leader>tl", fzf.resume, desc = "Resume last" },
-      { "gr", fzf.lsp_references, desc = "Lsp references" },
-      { "gi", fzf.lsp_implementations, desc = "Lsp implementations" },
-      { "gd", fzf.lsp_definitions, desc = "Lsp definitions" },
-      { "gD", fzf.lsp_typedefs, desc = "Lsp type definitions" },
-    })
   end,
+  keys = {
+    { "<leader>tf", function() require("fzf-lua").files() end, desc = "Files" },
+    { "<leader>tb", function() require("fzf-lua").buffers() end, desc = "Buffers" },
+    { "<leader>t/", function() require("fzf-lua").live_grep() end, desc = "Grep" },
+    { "<leader>tr", function() require("fzf-lua").oldfiles() end, desc = "Recent files" },
+    { "<leader>td", function() require("fzf-lua").diagnostics_document() end, desc = "Diagnostics" },
+    { "<leader>tD", function() require("fzf-lua").diagnostics_workspace() end, desc = "Workspace diagnostics" },
+    { "<leader>ts", function() require("fzf-lua").lsp_document_symbols() end, desc = "Symbols" },
+    { "<leader>tS", function() require("fzf-lua").lsp_live_workspace_symbols() end, desc = "Workspace symbols" },
+    { "<leader>tg", function() require("fzf-lua").git_status() end, desc = "Git files" },
+    { "<leader>tl", function() require("fzf-lua").resume() end, desc = "Resume last" },
+    { "gr", function() require("fzf-lua").lsp_references() end, desc = "Lsp references" },
+    { "gi", function() require("fzf-lua").lsp_implementations() end, desc = "Lsp implementations" },
+    { "gd", function() require("fzf-lua").lsp_definitions() end, desc = "Lsp definitions" },
+    { "gD", function() require("fzf-lua").lsp_typedefs() end, desc = "Lsp type definitions" },
+  },
 }
