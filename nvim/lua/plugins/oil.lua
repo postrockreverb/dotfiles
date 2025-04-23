@@ -1,8 +1,6 @@
 return {
   "stevearc/oil.nvim",
-  init = function()
-    vim.api.nvim_create_user_command("Ex", "Oil", { nargs = "?" })
-  end,
+  init = function() vim.api.nvim_create_user_command("Ex", "Oil", { nargs = "?" }) end,
   cmd = {
     "Oil",
   },
@@ -13,18 +11,15 @@ return {
     prompt_save_on_select_new_entry = true,
     keymaps = {
       ["<C-w>q"] = { "actions.close", mode = "n" },
+      ["<esc>"] = { "actions.close", mode = "n" },
       ["<leader>t/"] = {
-        function()
-          require("fzf-lua").live_grep({ cwd = require("oil").get_current_dir() })
-        end,
+        function() require("fzf-lua").live_grep({ cwd = require("oil").get_current_dir() }) end,
         mode = "n",
         nowait = true,
         desc = "Find files in the current directory",
       },
       ["<leader>tf"] = {
-        function()
-          require("fzf-lua").files({ cwd = require("oil").get_current_dir() })
-        end,
+        function() require("fzf-lua").files({ cwd = require("oil").get_current_dir() }) end,
         mode = "n",
         nowait = true,
         desc = "Find files in the current directory",
