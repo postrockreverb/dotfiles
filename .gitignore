@@ -24,6 +24,9 @@ fish/completions
 !nvim
 !nvim/**/*
 
+!skhd
+!skhd/**/*
+
 !tmux
 !tmux/**/*
 tmux/plugins
