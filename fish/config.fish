@@ -8,6 +8,7 @@ if test "$TERM" = "xterm-kitty"
 end
 
 alias fish_reload_rc="source ~/.config/fish/config.fish"
+alias brew_bundle="brew bundle --file=~/.config/brew/Brewfile"
 
 source ~/.config/fish/prompt.fish
 source ~/.config/fish/git.fish
