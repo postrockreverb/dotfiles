@@ -78,34 +78,24 @@ local function tm_hl_scope_settings(group)
 
   local hl = vim.api.nvim_get_hl_by_name(group, true)
 
-  if hl.foreground then
-    settings = settings .. tm_entry("foreground", string.format("#%06x", hl.foreground))
-  end
+  if hl.foreground then settings = settings .. tm_entry("foreground", string.format("#%06x", hl.foreground)) end
 
-  if hl.background then
-    settings = settings .. tm_entry("background", string.format("#%06x", hl.background))
-  end
+  if hl.background then settings = settings .. tm_entry("background", string.format("#%06x", hl.background)) end
 
   local font_styles = ""
 
-  if hl.italic then
-    font_styles = font_styles .. "italic"
-  end
+  if hl.italic then font_styles = font_styles .. "italic" end
 
-  if hl.bold then
-    font_styles = font_styles .. "bold"
-  end
+  if hl.bold then font_styles = font_styles .. "bold" end
 
-  if font_styles then
-    settings = settings .. tm_entry("fontStyle", font_styles)
-  end
+  if font_styles then settings = settings .. tm_entry("fontStyle", font_styles) end
 
   return settings
 end
 
 local m = {}
 
-function m.convert(path)
+function m.transform(path)
   local colorscheme = vim.g.colors_name or "default"
 
   local settings = ""
@@ -167,18 +157,16 @@ function m.convert(path)
 
   if io.open(path, "r") then
     local choice = vim.fn.confirm("Overwrite " .. path .. "?", "&Yes\n&No", 2)
-    if choice == 2 then
-      return
-    end
+    if choice == 2 then return end
   end
 
   local file = io.open(path, "w")
   if file then
     file:write(content)
     file:close()
-    print("Colorscheme converted to tmTheme: " .. path)
+    print("Colorscheme converted to tm: " .. path)
   else
-    print("Failed to write tmTheme file.")
+    print("Failed to write tm file.")
   end
 end
 
