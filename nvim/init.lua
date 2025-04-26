@@ -5,13 +5,12 @@ local themes_tbl = {
 
 local theme = os.getenv("SHARED_THEME")
 if not themes_tbl[theme] then
-  theme = "habamax"
   vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
   vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
+  vim.cmd.colorscheme("habamax")
+else
+  vim.g.shared_theme = theme
 end
-vim.g.shared_theme = theme
 
 require("config.nvim")
 require("config.lazy")
-
-vim.cmd([[colorscheme ]] .. theme)

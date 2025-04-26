@@ -19,4 +19,5 @@ return {
       IlluminatedWordWrite = { underline = true, bg = "<color>" },
     },
   },
+  init = function() vim.cmd.colorscheme("rose-pine") end,
 }
