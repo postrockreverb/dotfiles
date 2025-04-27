@@ -9,6 +9,7 @@ end
 
 alias fish_reload_rc="source ~/.config/fish/config.fish"
 alias brew_bundle="brew bundle --file=~/.config/brew/Brewfile"
+alias brew_bundle_export="brew bundle dump --file=\"~/.config/brew/Brewfile\" --force"
 
 source ~/.config/fish/prompt.fish
 source ~/.config/fish/git.fish
