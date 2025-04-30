@@ -32,6 +32,69 @@ local function get_script_path(script_name)
   end
 end
 
+local function get_changed_git_files()
+  local handle = io.popen("git status --porcelain")
+  if not handle then
+    return {}, "Error: Could not run git command or not in a git repo"
+  end
+
+  local deleted_files = {}
+  local changed_files = {}
+
+  for line in handle:lines() do
+    local status, file = line:match("^(..)%s+(.*)")
+
+    if status and file then
+      if status == "??" then
+        -- Untracked files (status ??)
+        table.insert(changed_files, file)
+      elseif status == " M" then
+        -- Modified files (unstaged) (status M)
+        table.insert(changed_files, file)
+      elseif status == " A" then
+        -- Staged new files (status A)
+        table.insert(changed_files, file)
+      elseif status == "AM" or status == "MM" or status == " M" then
+        -- Staged modified files (status M for staged and M for modified)
+        table.insert(changed_files, file)
+      elseif status == " D" then
+        -- Deleted files (status D)
+        table.insert(deleted_files, file)
+      end
+    end
+  end
+
+  handle:close() -- Close the handle
+  return {
+    changed_files = changed_files,
+    deleted_files = deleted_files,
+  } -- Return the list of changed files
+end
+
+local function get_directory_from_path(file_path)
+  -- Match everything up to the last slash (directory path)
+  local directory = file_path:match("^(.*)/[^/]+$")
+
+  -- If no match is found, return the current path (it's either a root or the file has no directory)
+  return directory or file_path
+end
+
+local function get_relative_buffer_path(directory)
+  local current_file = vim.fn.expand("%:p")
+
+  if not directory:match("/$") then
+    directory = directory .. "/"
+  end
+
+  local relative_path = current_file:match("^" .. directory .. "(.*)")
+
+  if not relative_path then
+    return nil, "The file is not inside the provided directory."
+  end
+
+  return relative_path
+end
+
 local function prepare_opts(opts)
   opts = opts or {}
   opts.timeout_ms = opts.timeout_ms or 0
@@ -74,5 +137,8 @@ end
 
 return {
   get_script_path = get_script_path,
+  get_relative_buffer_path = get_relative_buffer_path,
+  get_directory_from_path = get_directory_from_path,
+  get_changed_git_files = get_changed_git_files,
   run = run_bash_script,
 }
