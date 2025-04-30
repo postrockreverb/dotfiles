@@ -1,3 +1,3 @@
-fn - a : ims-mac com.apple.keylayout.ABC
+cmd - space : ims-mac com.apple.keylayout.ABC
 fn - j : ims-mac com.apple.inputmethod.Kotoeri.RomajiTyping.Japanese
 fn - k : ims-mac com.apple.keylayout.Russian
