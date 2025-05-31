@@ -1,4 +1,4 @@
-local helpers = require("plugins.local.export-theme.helpers")
+local helpers = require("plugins.local.export-colorscheme.helpers")
 
 -- NB: Lines with "$" in them are stripped from the final output, this
 --     allows the transform user to not have to specify everything.

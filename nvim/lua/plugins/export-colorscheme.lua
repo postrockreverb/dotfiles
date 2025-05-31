@@ -2,14 +2,14 @@ local cmd_tm = "ExportTm"
 local cmd_kitty = "ExportKitty"
 
 return {
-  "export-theme",
-  dir = vim.fn.stdpath("config") .. "/lua/plugins/local/export-theme",
+  "export-colorscheme",
+  dir = vim.fn.stdpath("config") .. "/lua/plugins/local/export-colorscheme",
   cmd = {
     cmd_tm,
     cmd_kitty,
   },
   config = function()
-    local export = require("plugins.local.export-theme")
+    local export = require("plugins.local.export-colorscheme")
 
     local exportTm = function()
       local colorscheme = vim.g.colors_name or "colorscheme"
