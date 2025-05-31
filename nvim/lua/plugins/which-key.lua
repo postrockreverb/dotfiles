@@ -36,6 +36,11 @@ return {
       -- rename
       { "<leader>r", require("plugins.utils.renamer").rename_append, desc = "Rename append" },
       { "<leader>R", require("plugins.utils.renamer").rename_insert, desc = "Rename insert" },
+
+      -- lsp
+      { "K", vim.lsp.buf.hover },
+      { "<leader>a", vim.lsp.buf.code_action, desc = "Actions", mode = { "n", "v" } },
+      { "<leader>do", vim.diagnostic.open_float, desc = "Open float" },
     })
   end,
 }

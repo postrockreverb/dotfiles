@@ -65,6 +65,21 @@ return {
     { "<leader>tS", function() require("fzf-lua").lsp_live_workspace_symbols() end, desc = "Workspace symbols" },
     { "<leader>tg", function() require("fzf-lua").git_status() end, desc = "Git files" },
     { "<leader>tl", function() require("fzf-lua").resume() end, desc = "Resume last" },
+    {
+      "<leader>tz",
+      function()
+        require("fzf-lua").zoxide({
+          actions = {
+            enter = function(selected)
+              local path = selected[1]:match("[^\t]+$") or selected[1]
+              vim.cmd("Oil " .. path)
+            end,
+          },
+        })
+      end,
+      desc = "Zoxide",
+    },
+
     { "gr", function() require("fzf-lua").lsp_references() end, desc = "Lsp references" },
     { "gi", function() require("fzf-lua").lsp_implementations() end, desc = "Lsp implementations" },
     { "gd", function() require("fzf-lua").lsp_definitions() end, desc = "Lsp definitions" },

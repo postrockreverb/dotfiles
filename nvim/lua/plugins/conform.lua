@@ -4,12 +4,13 @@ return {
     opts = {
       ensure_installed = {
         "stylua",
-        -- "php_cs_fixer",
+        "php_cs_fixer",
         "prettierd",
         "prettier",
         "rustywind",
         "gofumpt",
         "goimports",
+        "clang-format",
       },
       automatic_installation = true,
       quiet_mode = false,
@@ -24,7 +25,7 @@ return {
       -- https://github.com/stevearc/conform.nvim?tab=readme-ov-file#formatters
       formatters_by_ft = {
         lua = { "stylua" },
-        -- php = { "php_cs_fixer" },
+        php = { "php_cs_fixer" },
         typescript = { "prettierd", "prettier" },
         typescriptreact = { "prettierd", "prettier", "rustywind" },
         javascript = { "prettierd", "prettier" },
@@ -37,6 +38,7 @@ return {
         markdown = { "prettierd", "prettier" },
         astro = { "prettierd", "prettier" },
         sh = { "shfmt" },
+        objc = { "clang-format" },
       },
     },
   },
