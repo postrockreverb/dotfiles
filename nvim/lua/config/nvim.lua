@@ -53,6 +53,14 @@ vim.opt.cursorline = false
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.foldlevelstart = 99
+vim.opt.foldtext = "v:lua.custom_fold_text()"
+
+function _G.custom_fold_text()
+  local start_line = vim.fn.getline(vim.v.foldstart)
+  local end_line = vim.fn.getline(vim.v.foldend)
+  local folded_lines = vim.v.foldend - vim.v.foldstart - 1
+  return string.format("%s +%d lines %s ", start_line, folded_lines, end_line)
+end
 
 -- spelling
 vim.opt.spell = false
