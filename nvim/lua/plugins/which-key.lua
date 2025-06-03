@@ -33,13 +33,13 @@ return {
       { "[l", "<cmd>lprev<cr>zz", desc = "Previous quickfix list location" },
       { "]l", "<cmd>lnext<cr>zz", desc = "Next quickfix list location" },
 
-      -- rename
-      { "<leader>r", require("plugins.utils.renamer").rename_append, desc = "Rename append" },
-      { "<leader>R", require("plugins.utils.renamer").rename_insert, desc = "Rename insert" },
-
       -- lsp
       { "K", vim.lsp.buf.hover },
-      { "<leader>a", vim.lsp.buf.code_action, desc = "Actions", mode = { "n", "v" } },
+      { "<leader>r", require("plugins.utils.renamer").rename_append, desc = "Lsp rename append" },
+      { "<leader>R", require("plugins.utils.renamer").rename_insert, desc = "Lsp rename insert" },
+      { "<leader>a", vim.lsp.buf.code_action, desc = "Lsp code action", mode = { "n", "v" } },
+
+      -- diagnostics
       { "<leader>do", vim.diagnostic.open_float, desc = "Open float" },
     })
   end,
