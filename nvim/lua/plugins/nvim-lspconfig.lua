@@ -39,6 +39,9 @@ return {
           })
         end,
       },
+      clangd = {
+        filetypes = { "c", "cpp", "objc", "objcpp" },
+      },
     }
 
     local ensure_installed = vim.tbl_keys(servers or {})
@@ -53,6 +56,7 @@ return {
       "eslint",
       "dockerls",
       "ols",
+      "clangd",
     })
 
     local original_capabilities = vim.lsp.protocol.make_client_capabilities()
