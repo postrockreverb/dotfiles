@@ -11,7 +11,6 @@ return {
     prompt_save_on_select_new_entry = true,
     keymaps = {
       ["<C-w>q"] = { "actions.close", mode = "n" },
-      ["<esc>"] = { "actions.close", mode = "n" },
       ["<leader>t/"] = {
         function() require("fzf-lua").live_grep({ cwd = require("oil").get_current_dir() }) end,
         mode = "n",

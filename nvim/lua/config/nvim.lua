@@ -53,14 +53,6 @@ vim.opt.cursorline = false
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.foldlevelstart = 99
-vim.opt.foldtext = "v:lua.custom_fold_text()"
-
-function _G.custom_fold_text()
-  local start_line = vim.fn.getline(vim.v.foldstart)
-  local end_line = vim.fn.getline(vim.v.foldend)
-  local folded_lines = vim.v.foldend - vim.v.foldstart - 1
-  return string.format("%s +%d lines %s ", start_line, folded_lines, end_line)
-end
 
 -- spelling
 vim.opt.spell = false
@@ -87,3 +79,32 @@ local langmap = vim.fn.join({
 }, ",")
 
 vim.opt.langmap = langmap
+
+-- statusline
+vim.o.statusline = "%f %h%w%m%r %{v:lua.diagnostics_status()}%=%-14.(%l,%c%V%) %P"
+
+function _G.diagnostics_status()
+  local result = {}
+
+  local errors = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
+  if errors > 0 then
+    table.insert(result, "E:" .. errors)
+  end
+
+  local warnings = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })
+  if warnings > 0 then
+    table.insert(result, "W:" .. warnings)
+  end
+
+  local info = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.INFO })
+  if info > 0 then
+    table.insert(result, "I:" .. info)
+  end
+
+  local hints = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.HINT })
+  if hints > 0 then
+    table.insert(result, "H:" .. hints)
+  end
+
+  return table.concat(result, " ")
+end
