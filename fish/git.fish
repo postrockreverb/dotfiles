@@ -5,6 +5,7 @@ alias g="lazygit"
 alias ga="git add"
 
 alias gp="git push"
+alias gpf="git push -f"
 
 alias gf="git fetch"
 
@@ -16,6 +17,10 @@ alias gr="git rebase"
 alias grc="git rebase --continue"
 alias gra="git rebase --abort"
 alias grm="git rebase origin/master"
+
+alias gch="git cherry-pick"
+alias gchc="git cherry-pick --continue"
+alias gcha="git cherry-pick --abort"
 
 alias gca="git commit --amend"
 alias gcm="git commit -m"
