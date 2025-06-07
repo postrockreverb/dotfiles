@@ -13,7 +13,7 @@ return {
     },
     previewers = {
       bat = {
-        theme = vim.g.shared_theme,
+        theme = vim.g.theme,
         args = "--color=always --style=numbers --tabs=2",
       },
       git_diff = {

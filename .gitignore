@@ -27,6 +27,9 @@ fish/completions
 !nvim
 !nvim/**/*
 
+!scripts
+!scripts/**/*
+
 !skhd
 !skhd/**/*
 

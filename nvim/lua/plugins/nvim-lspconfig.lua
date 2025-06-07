@@ -42,6 +42,7 @@ return {
       clangd = {
         filetypes = { "c", "cpp", "objc", "objcpp" },
       },
+      bashls = {},
     }
 
     local ensure_installed = vim.tbl_keys(servers or {})
@@ -57,6 +58,7 @@ return {
       "dockerls",
       "ols",
       "clangd",
+      "bashls",
     })
 
     local original_capabilities = vim.lsp.protocol.make_client_capabilities()

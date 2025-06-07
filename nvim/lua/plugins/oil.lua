@@ -1,6 +1,8 @@
 return {
   "stevearc/oil.nvim",
-  init = function() vim.api.nvim_create_user_command("Ex", "Oil", { nargs = "?" }) end,
+  init = function()
+    vim.api.nvim_create_user_command("Ex", "Oil", { nargs = "?" })
+  end,
   cmd = {
     "Oil",
   },
@@ -26,6 +28,9 @@ return {
     },
     view_options = {
       show_hidden = true,
+      is_always_hidden = function(name, _)
+        return name == ".DS_Store" or name == ".git"
+      end,
     },
   },
 }

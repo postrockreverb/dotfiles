@@ -12,11 +12,10 @@ alias rm "trash"
 alias reveal "open --reveal"
 
 # bat aliases
-export BAT_THEME=$SHARED_THEME
 alias cat "bat --plain"
 
 # eza aliases
-alias ll "eza --long --git --icons=always --no-user --no-permissions --no-time --group-directories-first"
+alias ll "eza --long --icons=always --no-user --no-permissions --no-time --group-directories-first"
 alias lla "ll -a"
 
 # sleep aliases

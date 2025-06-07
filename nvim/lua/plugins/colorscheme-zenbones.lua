@@ -1,6 +1,6 @@
 return {
   "zenbones-theme/zenbones.nvim",
-  enabled = vim.g.shared_theme == "zenbones",
+  enabled = vim.g.theme == "zenbones",
   dependencies = "rktjmp/lush.nvim",
   lazy = false,
   priority = 1000,

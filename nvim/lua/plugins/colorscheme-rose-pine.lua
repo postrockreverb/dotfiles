@@ -1,7 +1,7 @@
 return {
   "rose-pine/neovim",
   lazy = false,
-  enabled = vim.g.shared_theme == "rose-pine",
+  enabled = vim.g.theme == "rose-pine",
   priority = 1000,
   name = "rose-pine",
   opts = {
