@@ -54,6 +54,12 @@ vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.foldlevelstart = 99
 
+-- diagnostics
+vim.diagnostic.config({
+  severity_sort = true,
+  virtual_text = { source = "if_many", spacing = 2 },
+})
+
 -- spelling
 vim.opt.spell = false
 
