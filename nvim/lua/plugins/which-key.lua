@@ -10,6 +10,9 @@ return {
     icons = {
       mappings = false,
     },
+    win = {
+      border = "none",
+    },
   },
   config = function(_, opts)
     local wk = require("which-key")

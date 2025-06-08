@@ -5,6 +5,9 @@ alias v "nvim"
 alias make "gmake"
 alias m "make"
 
+# mv aliases
+alias mv "mv -iv"
+
 # trash aliases
 alias rm "trash"
 
