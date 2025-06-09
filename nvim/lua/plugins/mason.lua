@@ -41,7 +41,6 @@ local servers = {
     end,
   },
   astro = {},
-  eslint = {},
 
   -- util
   bashls = {},
@@ -51,21 +50,25 @@ local servers = {
 local formatters_by_ft = {
   lua = { "stylua" },
 
-  typescript = { "prettierd", "prettier" },
-  typescriptreact = { "prettierd", "prettier", "rustywind" },
-  javascript = { "prettierd", "prettier" },
-  javascriptreact = { "prettierd", "prettier", "rustywind" },
-  html = { "prettierd", "prettier" },
-  css = { "prettierd", "prettier" },
-  svelte = { "prettierd", "prettier" },
-  astro = { "prettierd", "prettier" },
+  typescript = { "prettierd" },
+  typescriptreact = { "prettierd", "rustywind" },
+  javascript = { "prettierd" },
+  javascriptreact = { "prettierd", "rustywind" },
+  html = { "prettierd" },
+  css = { "prettierd" },
+  svelte = { "prettierd" },
+  astro = { "prettierd" },
 
   go = { "gofumpt", "goimports" },
   objc = { "clang-format" },
 
   sh = { "shfmt" },
-  markdown = { "prettierd", "prettier" },
-  json = { "prettierd", "prettier" },
+  markdown = { "prettierd" },
+  json = { "prettierd" },
+}
+
+local linters_by_ft = {
+  ["*"] = { "codespell" },
 }
 
 local formatters = {}
@@ -75,12 +78,17 @@ for _, fmts in pairs(formatters_by_ft) do
   end
 end
 
-local ensure_installed = vim.tbl_extend(
-  "force",
-  -- ensure installed servers here
-  vim.tbl_keys(servers),
-  vim.tbl_keys(formatters)
-)
+local linters = {}
+for _, lts in pairs(linters_by_ft) do
+  for _, lt in ipairs(lts) do
+    linters[lt] = true
+  end
+end
+
+local ensure_installed = {}
+vim.list_extend(ensure_installed, vim.tbl_keys(servers))
+vim.list_extend(ensure_installed, vim.tbl_keys(formatters))
+vim.list_extend(ensure_installed, vim.tbl_keys(linters))
 
 return {
   {
@@ -89,6 +97,7 @@ return {
       { "williamboman/mason.nvim", opts = {} },
       "williamboman/mason-lspconfig.nvim",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
+      { "j-hui/fidget.nvim", opts = {} }, -- Useful status updates for LSP.
     },
     config = function()
       local original_capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -120,5 +129,23 @@ return {
     opts = {
       formatters_by_ft = formatters_by_ft,
     },
+  },
+  {
+    "mfussenegger/nvim-lint",
+    event = { "BufReadPre", "BufNewFile" },
+    config = function()
+      require("lint").linters_by_ft = linters_by_ft
+
+      local group = vim.api.nvim_create_augroup("lint", { clear = true })
+
+      vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
+        group = group,
+        callback = function()
+          local lint = require("lint")
+          lint.try_lint()
+          lint.try_lint("codespell")
+        end,
+      })
+    end,
   },
 }
