@@ -43,7 +43,7 @@ vim.g.netrw_localrmdir = "rm -r"
 vim.wo.wrap = false
 
 -- minimal number of screen lines to keep of the cursor
-vim.opt.scrolloff = 8
+vim.opt.scrolloff = 0
 vim.opt.sidescrolloff = 8
 
 -- highlight the current line

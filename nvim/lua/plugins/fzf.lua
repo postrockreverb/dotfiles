@@ -81,7 +81,7 @@ return {
     },
 
     { "gr", function() require("fzf-lua").lsp_references() end, desc = "Lsp references" },
-    { "gi", function() require("fzf-lua").lsp_implementations() end, desc = "Lsp implementations" },
+    { "gI", function() require("fzf-lua").lsp_implementations() end, desc = "Lsp implementations" },
     { "gd", function() require("fzf-lua").lsp_definitions() end, desc = "Lsp definitions" },
     { "gD", function() require("fzf-lua").lsp_typedefs() end, desc = "Lsp type definitions" },
   },
