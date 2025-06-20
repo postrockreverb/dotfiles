@@ -19,6 +19,7 @@ return {
       "go",
       "json",
       "astro",
+      "templ",
     },
     sync_install = false,
     auto_install = true,

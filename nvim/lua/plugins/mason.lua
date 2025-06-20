@@ -19,6 +19,7 @@ local servers = {
       },
     },
   },
+  templ = {},
 
   -- c
   clangd = {
@@ -60,6 +61,8 @@ local formatters_by_ft = {
   astro = { "prettierd" },
 
   go = { "gofumpt", "goimports" },
+  templ = { "templ" },
+
   objc = { "clang-format" },
 
   sh = { "shfmt" },
