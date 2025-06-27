@@ -16,6 +16,8 @@ local servers = {
     settings = {
       gopls = {
         buildFlags = { "-tags=component" },
+        diagnosticsTrigger = "Save",
+        directoryFilters = { "-**/vendor", "-**/node_modules" },
       },
     },
   },
