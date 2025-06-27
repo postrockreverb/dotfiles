@@ -42,6 +42,9 @@ vim.g.netrw_localrmdir = "rm -r"
 -- no line wrap
 vim.wo.wrap = false
 
+-- sign column
+vim.wo.signcolumn = "yes"
+
 -- minimal number of screen lines to keep of the cursor
 vim.opt.scrolloff = 0
 vim.opt.sidescrolloff = 8
