@@ -103,8 +103,7 @@ return {
       { "j-hui/fidget.nvim", opts = {} }, -- Useful status updates for LSP.
     },
     config = function()
-      local original_capabilities = vim.lsp.protocol.make_client_capabilities()
-      local capabilities = require("blink.cmp").get_lsp_capabilities(original_capabilities)
+      local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
       require("mason-tool-installer").setup({
         ensure_installed = ensure_installed,
