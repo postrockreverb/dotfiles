@@ -1,0 +1,5 @@
+return {
+  codespell = {
+    filetypes = { "*" },
+  },
+}
