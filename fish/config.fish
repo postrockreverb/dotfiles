@@ -4,7 +4,7 @@ set -x XDG_CONFIG_HOME "$HOME/.config"
 set HOMEBREW_AUTO_UPDATE_SECS 1209600 # two weeks
 
 if test "$TERM" = "xterm-kitty"
-  alias ssh="kitty +kitten ssh"
+  alias kssh="kitty +kitten ssh"
 end
 
 alias theme="source ~/.config/scripts/theme.fish"
