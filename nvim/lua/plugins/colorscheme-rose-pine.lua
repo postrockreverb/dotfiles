@@ -1,7 +1,7 @@
 return {
   "rose-pine/neovim",
   lazy = false,
-  enabled = vim.g.theme == "rose-pine",
+  enabled = vim.g.theme == "rose-pine" or vim.g.theme == "rose-pine-dawn",
   priority = 1000,
   name = "rose-pine",
   opts = {
@@ -19,5 +19,11 @@ return {
       IlluminatedWordWrite = { underline = true, bg = "<color>" },
     },
   },
-  init = function() vim.cmd.colorscheme("rose-pine") end,
+  init = function()
+    local colorscheme = "rose-pine"
+    if vim.g.theme == "rose-pine-dawn" then
+      colorscheme = "rose-pine-dawn"
+    end
+    vim.cmd.colorscheme(colorscheme)
+  end,
 }
