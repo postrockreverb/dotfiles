@@ -21,7 +21,7 @@ return {
   },
 
   -- js
-  biome = {
+  prettierd = {
     filetypes = {
       "typescript",
       "typescriptreact",

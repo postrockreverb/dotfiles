@@ -1,3 +1,0 @@
-cmd - space : input-method-select com.apple.keylayout.ABC
-fn - j      : input-method-select com.apple.inputmethod.Kotoeri.RomajiTyping.Japanese
-fn - k      : input-method-select com.apple.keylayout.Russian
