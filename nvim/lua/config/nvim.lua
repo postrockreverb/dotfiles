@@ -53,8 +53,6 @@ vim.opt.sidescrolloff = 8
 vim.opt.cursorline = false
 
 -- folding
-vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.foldlevelstart = 99
 
 -- diagnostics
