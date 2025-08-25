@@ -1,3 +1,5 @@
+#!/bin/bash
+
 rm ~/.bun/install/cache
 
 go clean --modcache

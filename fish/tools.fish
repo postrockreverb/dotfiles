@@ -22,7 +22,7 @@ alias ll "eza --long --icons=always --no-user --no-permissions --no-time --group
 alias lla "ll -a"
 
 # sleep aliases
-alias sleep_in "sudo shutdown -s"
+alias sleep_in "sudo shutdown -s -q"
 alias sleep_cancel "sudo pkill shutdown"
 
 # battery aliases

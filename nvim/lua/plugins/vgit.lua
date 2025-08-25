@@ -3,7 +3,7 @@ return {
   dependencies = {
     "nvim-lua/plenary.nvim",
   },
-  event = "VimEnter",
+  event = { "BufReadPre", "BufNewFile" },
   keys = {
     { "<leader>gb", "<cmd>VGit buffer_gutter_blame_preview<cr>", desc = "Blame" },
     { "<leader>gz", "<cmd>VGit buffer_hunk_reset<cr>", desc = "Reset hunk" },
