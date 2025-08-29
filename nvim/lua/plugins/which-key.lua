@@ -24,6 +24,7 @@ return {
       { "<leader>d", group = "Diagnostics" },
       { "<leader>q", group = "Quickfix list" },
       { "<leader>b", group = "Buffers" },
+      { "<leader>y", group = "Yank" },
 
       -- buffers
       { "<leader>bD", require("plugins.utils.buffers").clear_hidden, desc = "Close other" },
@@ -44,6 +45,10 @@ return {
 
       -- diagnostics
       { "<leader>do", vim.diagnostic.open_float, desc = "Open float" },
+
+      -- yank
+      { "<leader>yp", require("plugins.utils.yank").path, desc = "File path" },
+      { "<leader>yP", require("plugins.utils.yank").pathlinenr, desc = "File path with line number" },
     })
   end,
 }

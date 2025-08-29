@@ -93,6 +93,10 @@ local function tm_hl_scope_settings(group)
   return settings
 end
 
+local function hex(color)
+  return string.format("#%06x", color or 0)
+end
+
 local m = {}
 
 function m.transform(path)
@@ -101,22 +105,22 @@ function m.transform(path)
   local settings = ""
 
   local cursor = vim.api.nvim_get_hl_by_name("Cursor", true)
-  settings = settings .. tm_entry("caret", string.format("#%06x", cursor.foreground))
+  settings = settings .. tm_entry("caret", hex(cursor.foreground))
 
   local normal = vim.api.nvim_get_hl_by_name("Normal", true)
-  settings = settings .. tm_entry("foreground", string.format("#%06x", normal.foreground))
+  settings = settings .. tm_entry("foreground", hex(normal.foreground))
 
   local whitespace = vim.api.nvim_get_hl_by_name("Whitespace", true)
-  settings = settings .. tm_entry("invisibles", string.format("#%06x", whitespace.foreground))
+  settings = settings .. tm_entry("invisibles", hex(whitespace.foreground))
 
   local cursorline = vim.api.nvim_get_hl_by_name("CursorLine", true)
-  settings = settings .. tm_entry("lineHighlight", string.format("#%06x", cursorline.background))
+  settings = settings .. tm_entry("lineHighlight", hex(cursorline.background))
 
   local visual = vim.api.nvim_get_hl_by_name("Visual", true)
-  settings = settings .. tm_entry("selection", string.format("#%06x", visual.background))
+  settings = settings .. tm_entry("selection", hex(visual.background))
 
   local linenr = vim.api.nvim_get_hl_by_name("LineNr", true)
-  settings = settings .. tm_entry("gutterForeground", string.format("#%06x", linenr.foreground))
+  settings = settings .. tm_entry("gutterForeground", hex(linenr.foreground))
 
   local scopes = ""
   scopes = scopes .. tm_settings(settings)
@@ -160,13 +164,14 @@ function m.transform(path)
     if choice == 2 then return end
   end
 
+  -- Write the file
   local file = io.open(path, "w")
   if file then
     file:write(content)
     file:close()
-    print("Colorscheme converted to tm: " .. path)
+    print("✓ Exported colorscheme to: " .. path)
   else
-    print("Failed to write tm file.")
+    error("Failed to write file: " .. path)
   end
 end
 

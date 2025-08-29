@@ -21,7 +21,7 @@ return {
 
     local exportKitty = function()
       local colorscheme = vim.g.colors_name or "colorscheme"
-      local path = vim.fn.expand("~/.config/kitty/" .. colorscheme .. ".conf")
+      local path = vim.fn.expand("~/.config/kitty/themes/" .. colorscheme .. ".conf")
       export.kitty(path)
     end
 

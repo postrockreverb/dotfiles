@@ -10,6 +10,9 @@ return {
     { "<leader>gZ", "<cmd>VGit buffer_reset<cr>", desc = "Reset buffer" },
     { "<leader>gh", "<cmd>VGit buffer_hunk_preview<cr>", desc = "Preview hunk" },
     { "<leader>gd", "<cmd>VGit buffer_diff_preview<cr>", desc = "Buffer diff" },
+    { "<leader>ga", "<cmd>VGit buffer_hunk_stage<cr>", desc = "Stage hunk" },
+    { "[h", "<cmd>VGit hunk_up<cr>", desc = "Previous hunk" },
+    { "]h", "<cmd>VGit hunk_down<cr>", desc = "Next hunk" },
   },
   opts = {
     settings = {

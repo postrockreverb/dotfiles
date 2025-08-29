@@ -1,13 +1,9 @@
 local helpers = require("plugins.local.export-colorscheme.helpers")
 
--- NB: Lines with "$" in them are stripped from the final output, this
---     allows the transform user to not have to specify everything.
--- https://raw.githubusercontent.com/kovidgoyal/kitty-themes/master/template.conf
+-- Kitty theme template based on official format
+-- https://sw.kovidgoyal.net/kitty/kittens/themes/
 local template = [[
 # vim:ft=kitty
-# This is a template that can be used to create new kitty themes$
-# Theme files should start with a metadata block consisting of$
-# lines beginning with ##. All metadata fields are optional.$
 
 ## name: $name
 ## author: $author
@@ -15,12 +11,7 @@ local template = [[
 ## upstream: $upstream
 ## blurb: $blurb
 
-# All the settings below are colors, which you can choose to modify, or use the$
-# defaults. You can also add non-color based settings if needed but note that$
-# these will not work with using kitty @ set-colors with this theme. For a reference$
-# on what these settings do see https://sw.kovidgoyal.net/kitty/conf/$
-
-# The basic colors$
+# The basic colors
 foreground                      $fg
 background                      $bg
 selection_foreground            $selection_fg
@@ -39,172 +30,218 @@ inactive_border_color           $border_inactive
 bell_border_color               $border_bell
 
 # OS Window titlebar colors
-wayland_titlebar_color $titlebar
-macos_titlebar_color $titlebar
+wayland_titlebar_color          $titlebar_bg
+macos_titlebar_color            $titlebar_bg
 
 # Tab bar colors
 active_tab_foreground           $tab_active_fg
 active_tab_background           $tab_active_bg
 inactive_tab_foreground         $tab_inactive_fg
 inactive_tab_background         $tab_inactive_bg
-tab_bar_background              $tab_bg
+tab_bar_background              $tab_bar_bg
+tab_bar_margin_color            $tab_bar_margin
 
 # Colors for marks (marked text in the terminal)
-
-mark1_foreground $mark1_fg
-mark1_background $mark1_bg
-mark2_foreground $mark2_fg
-mark2_background $mark2_bg
-mark3_foreground $mark3_fg
-mark3_background $mark3_bg
+mark1_foreground                $mark1_fg
+mark1_background                $mark1_bg
+mark2_foreground                $mark2_fg
+mark2_background                $mark2_bg
+mark3_foreground                $mark3_fg
+mark3_background                $mark3_bg
 
 # The basic 16 colors
+
 # black
-color0 $black
-color8 $bright_black
+color0                          $black
+color8                          $bright_black
 
 # red
-color1 $red
-color9 $bright_red
+color1                          $red
+color9                          $bright_red
 
 # green
-color2  $green
-color10 $bright_green
+color2                          $green
+color10                         $bright_green
 
 # yellow
-color3  $yellow
-color11 $bright_yellow
+color3                          $yellow
+color11                         $bright_yellow
 
 # blue
-color4  $blue
-color12 $bright_blue
+color4                          $blue
+color12                         $bright_blue
 
 # magenta
-color5  $magenta
-color13 $bright_magenta
+color5                          $magenta
+color13                         $bright_magenta
 
 # cyan
-color6  $cyan
-color14 $bright_cyan
+color6                          $cyan
+color14                         $bright_cyan
 
 # white
-color7  $white
-color15 $bright_white
+color7                          $white
+color15                         $bright_white
 
-# You can set the remaining 240 colors as color16 to color255.]]
-
-local check_keys = {
-  "fg",
-  "bg",
-  "cursor_fg",
-  "cursor_bg",
-  "selection_fg",
-  "selection_bg",
-  "black",
-  "red",
-  "green",
-  "yellow",
-  "blue",
-  "magenta",
-  "cyan",
-  "white",
-  "bright_black",
-  "bright_red",
-  "bright_green",
-  "bright_yellow",
-  "bright_blue",
-  "bright_magenta",
-  "bright_cyan",
-  "bright_white",
-}
-
-local function color(group, attr)
-  local ok, hl = pcall(vim.api.nvim_get_hl, 0, { name = group })
-  if ok and hl[attr] then return string.format("#%06X", hl[attr]) end
-  return "#000000" -- fallback
-end
+# Extended colors can be set as color16 to color255]]
 
 local m = {}
 
+-- Helper function to get color from highlight group
+local function get_hl_color(group, attr)
+  local ok, hl = pcall(vim.api.nvim_get_hl, 0, { name = group, link = false })
+  if ok and hl[attr] then
+    return string.format("#%06x", hl[attr])
+  end
+  return nil
+end
+
+-- Helper function to get terminal color
+local function get_terminal_color(index)
+  local var_name = "terminal_color_" .. index
+  local color = vim.g[var_name]
+  if color then
+    return color
+  end
+  return nil
+end
+
+-- Helper function to ensure color has # prefix
+local function ensure_hex(color)
+  if color and not color:match("^#") then
+    return "#" .. color
+  end
+  return color
+end
+
+-- Extract colors from the current Neovim colorscheme
+local function extract_colors()
+  local colors = {}
+
+  -- Get colorscheme name
+  colors.name = vim.g.colors_name or "neovim"
+  colors.author = "Auto-generated from Neovim"
+  colors.license = "MIT"
+  colors.upstream = "https://github.com/neovim/neovim"
+  colors.blurb = string.format("Exported from %s Neovim colorscheme", colors.name)
+
+  -- Basic colors from Normal highlight group
+  colors.fg = get_hl_color("Normal", "fg") or "#d0d0d0"
+  colors.bg = get_hl_color("Normal", "bg") or "#1c1c1c"
+
+  -- Selection colors from Visual highlight group
+  local visual_bg = get_hl_color("Visual", "bg")
+  local visual_fg = get_hl_color("Visual", "fg")
+  colors.selection_bg = visual_bg or "#404040"
+  colors.selection_fg = visual_fg or "none"
+
+  -- Cursor colors
+  local cursor_bg = get_hl_color("Cursor", "bg")
+  local cursor_fg = get_hl_color("Cursor", "fg")
+  colors.cursor_bg = cursor_bg or colors.fg
+  colors.cursor_fg = cursor_fg or colors.bg
+
+  -- URL color
+  colors.url = get_hl_color("Underlined", "fg") or "#0087bd"
+
+  -- Border colors
+  colors.border_active = get_hl_color("VertSplit", "fg") or get_hl_color("WinSeparator", "fg") or "#444444"
+  colors.border_inactive = get_hl_color("NormalNC", "fg") or get_hl_color("WinSeparator", "fg") or "#303030"
+  colors.border_bell = get_hl_color("WarningMsg", "fg") or get_hl_color("DiagnosticWarn", "fg") or "#ffaf00"
+
+  -- Titlebar colors
+  colors.titlebar_bg = get_hl_color("Title", "bg") or get_hl_color("StatusLine", "bg") or colors.bg
+
+  -- Tab bar colors
+  colors.tab_active_fg = get_hl_color("TabLineSel", "fg") or colors.fg
+  colors.tab_active_bg = get_hl_color("TabLineSel", "bg") or "#404040"
+  colors.tab_inactive_fg = get_hl_color("TabLine", "fg") or "#808080"
+  colors.tab_inactive_bg = get_hl_color("TabLine", "bg") or "#303030"
+  colors.tab_bar_bg = get_hl_color("TabLineFill", "bg") or "#202020"
+  colors.tab_bar_margin = colors.tab_bar_bg
+
+  -- Mark colors (using diff highlight groups)
+  colors.mark1_fg = get_hl_color("DiffAdd", "fg") or "#87d787"
+  colors.mark1_bg = get_hl_color("DiffAdd", "bg") or "#005f00"
+  colors.mark2_fg = get_hl_color("DiffChange", "fg") or "#87afff"
+  colors.mark2_bg = get_hl_color("DiffChange", "bg") or "#005f87"
+  colors.mark3_fg = get_hl_color("DiffDelete", "fg") or "#d78787"
+  colors.mark3_bg = get_hl_color("DiffDelete", "bg") or "#5f0000"
+
+  -- Terminal colors (0-15)
+  -- Try to get from vim.g.terminal_color_X first, then fallback to common highlight groups
+
+  -- Black (0, 8)
+  colors.black = get_terminal_color(0) or get_hl_color("Black", "fg") or "#000000"
+  colors.bright_black = get_terminal_color(8) or get_hl_color("DarkGray", "fg") or "#808080"
+
+  -- Red (1, 9)
+  colors.red = get_terminal_color(1) or get_hl_color("Red", "fg") or get_hl_color("DiagnosticError", "fg") or "#d70000"
+  colors.bright_red = get_terminal_color(9) or get_hl_color("LightRed", "fg") or "#ff5f5f"
+
+  -- Green (2, 10)
+  colors.green = get_terminal_color(2) or get_hl_color("Green", "fg") or get_hl_color("DiagnosticOk", "fg") or "#00af00"
+  colors.bright_green = get_terminal_color(10) or get_hl_color("LightGreen", "fg") or "#5fdf5f"
+
+  -- Yellow (3, 11)
+  colors.yellow = get_terminal_color(3) or get_hl_color("Yellow", "fg") or get_hl_color("DiagnosticWarn", "fg") or "#d7af00"
+  colors.bright_yellow = get_terminal_color(11) or get_hl_color("LightYellow", "fg") or "#ffff5f"
+
+  -- Blue (4, 12)
+  colors.blue = get_terminal_color(4) or get_hl_color("Blue", "fg") or get_hl_color("DiagnosticInfo", "fg") or "#0087d7"
+  colors.bright_blue = get_terminal_color(12) or get_hl_color("LightBlue", "fg") or "#5fafff"
+
+  -- Magenta (5, 13)
+  colors.magenta = get_terminal_color(5) or get_hl_color("Magenta", "fg") or get_hl_color("Statement", "fg") or "#af00af"
+  colors.bright_magenta = get_terminal_color(13) or get_hl_color("LightMagenta", "fg") or "#ff5fff"
+
+  -- Cyan (6, 14)
+  colors.cyan = get_terminal_color(6) or get_hl_color("Cyan", "fg") or get_hl_color("Function", "fg") or "#00afd7"
+  colors.bright_cyan = get_terminal_color(14) or get_hl_color("LightCyan", "fg") or "#5fdfff"
+
+  -- White (7, 15)
+  colors.white = get_terminal_color(7) or get_hl_color("Gray", "fg") or "#d0d0d0"
+  colors.bright_white = get_terminal_color(15) or get_hl_color("White", "fg") or "#ffffff"
+
+  -- Ensure all colors are properly formatted
+  for key, value in pairs(colors) do
+    if type(value) == "string" and value:match("^#?%x+$") then
+      colors[key] = ensure_hex(value)
+    end
+  end
+
+  return colors
+end
+
+-- Export the current colorscheme to a Kitty theme file
 function m.transform(path)
-  local colorscheme = vim.g.colors_name or "default"
+  -- Extract colors from current colorscheme
+  local colors = extract_colors()
 
-  local colors = {
-    fg = color("Normal", "fg"),
-    bg = color("Normal", "bg"),
-    cursor_fg = color("Cursor", "fg"),
-    cursor_bg = color("Cursor", "bg"),
-    selection_fg = color("Visual", "fg"),
-    selection_bg = color("Visual", "bg"),
+  -- Apply template
+  local content = helpers.apply_template(template, colors)
 
-    black = color("Black", "fg"),
-    red = color("Red", "fg"),
-    green = color("Green", "fg"),
-    yellow = color("Yellow", "fg"),
-    blue = color("Blue", "fg"),
-    magenta = color("Magenta", "fg"),
-    cyan = color("Cyan", "fg"),
-    white = color("White", "fg"),
+  -- Create directory if it doesn't exist
+  local dir = vim.fn.fnamemodify(path, ":h")
+  vim.fn.mkdir(dir, "p")
 
-    bright_black = color("BrightBlack", "fg"),
-    bright_red = color("BrightRed", "fg"),
-    bright_green = color("BrightGreen", "fg"),
-    bright_yellow = color("BrightYellow", "fg"),
-    bright_blue = color("BrightBlue", "fg"),
-    bright_magenta = color("BrightMagenta", "fg"),
-    bright_cyan = color("BrightCyan", "fg"),
-    bright_white = color("BrightWhite", "fg"),
-
-    -- optional fields (fallbacks or reuse)
-    url = color("Underlined", "fg"),
-    border_active = color("FloatBorder", "fg"),
-    border_inactive = color("WinSeparator", "fg"),
-    border_bell = color("WarningMsg", "fg"),
-    titlebar = color("Title", "fg"),
-
-    tab_active_fg = color("TabLineSel", "fg"),
-    tab_active_bg = color("TabLineSel", "bg"),
-    tab_inactive_fg = color("TabLine", "fg"),
-    tab_inactive_bg = color("TabLine", "bg"),
-    tab_bg = color("TabLineFill", "bg"),
-
-    mark1_fg = color("DiffAdd", "fg"),
-    mark1_bg = color("DiffAdd", "bg"),
-    mark2_fg = color("DiffChange", "fg"),
-    mark2_bg = color("DiffChange", "bg"),
-    mark3_fg = color("DiffDelete", "fg"),
-    mark3_bg = color("DiffDelete", "bg"),
-
-    name = colorscheme,
-    author = "Auto-generated",
-    license = "MIT",
-    upstream = "N/A",
-    blurb = "Theme auto-converted from " .. colorscheme .. " Neovim colorscheme",
-  }
-
-  for _, key in ipairs(check_keys) do
-    assert(colors[key], "kitty colors table missing required key: " .. key)
+  -- Check if file exists and ask for confirmation
+  if vim.fn.filereadable(path) == 1 then
+    local choice = vim.fn.confirm("File already exists: " .. path .. "\nOverwrite?", "&Yes\n&No", 2)
+    if choice ~= 1 then
+      print("Export cancelled")
+      return
+    end
   end
 
-  local replaced = helpers.split_newlines(helpers.apply_template(template, colors))
-
-  local content = ""
-  for _, line in ipairs(replaced) do
-    if not string.match(line, "%$") then content = content .. line .. "\n" end
-  end
-
-  if io.open(path, "r") then
-    local choice = vim.fn.confirm("Overwrite " .. path .. "?", "&Yes\n&No", 2)
-    if choice == 2 then return end
-  end
-
+  -- Write the file
   local file = io.open(path, "w")
   if file then
     file:write(content)
     file:close()
-    print("Colorscheme converted to kitty: " .. path)
+    print("✓ Exported colorscheme to: " .. path)
   else
-    print("Failed to write kitty file.")
+    error("Failed to write file: " .. path)
   end
 end
 
