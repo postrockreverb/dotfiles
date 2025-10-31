@@ -18,6 +18,7 @@ return {
         buildFlags = { "-tags=component" },
         diagnosticsTrigger = "Save",
         directoryFilters = { "-**/vendor", "-**/node_modules" },
+        semanticTokens = true,
       },
     },
   },
@@ -44,6 +45,9 @@ return {
     end,
   },
   astro = {},
+
+  -- python
+  pyright = {},
 
   -- shell
   bashls = {},

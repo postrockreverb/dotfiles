@@ -1,5 +1,7 @@
 set fish_greeting ""
 
+set PATH $PATH ~/.local/bin
+
 set -x XDG_CONFIG_HOME "$HOME/.config"
 set HOMEBREW_AUTO_UPDATE_SECS 1209600 # two weeks
 

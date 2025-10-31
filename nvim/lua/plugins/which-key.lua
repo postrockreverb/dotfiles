@@ -29,6 +29,7 @@ return {
       -- buffers
       { "<leader>bD", require("plugins.utils.buffers").clear_hidden, desc = "Close other" },
       { "<leader>bd", "<cmd>bp|sp|bn|bd<cr>", desc = "Close current" },
+      { "<leader>bp", '<cmd>term glow "%"<cr>', desc = "Preview in Glow" },
 
       -- quickfix list
       { "<leader>ql", "<cmd>copen<cr>", desc = "Open" },

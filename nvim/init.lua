@@ -4,6 +4,7 @@ local themes_tbl = {
   ["zenbones"] = true,
   ["zenbones-light"] = true,
   ["xeno-pink"] = true,
+  ["xeno-mononoke"] = true,
 }
 
 local theme = os.getenv("THEME")

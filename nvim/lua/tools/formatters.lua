@@ -35,6 +35,11 @@ return {
     },
   },
 
+  -- python
+  black = {
+    filetypes = { "python" },
+  },
+
   -- shell
   shfmt = {
     filetypes = { "sh" },

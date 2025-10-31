@@ -9,3 +9,7 @@ set -x PATH $PATH $GOPATH/bin
 # php
 alias noverify="~/.local/bin/noverify"
 alias phpactor="~/.local/bin/phpactor/bin/phpactor"
+
+# python
+alias pip pip3
+alias python python3
