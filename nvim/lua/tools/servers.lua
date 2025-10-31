@@ -17,8 +17,21 @@ return {
       gopls = {
         buildFlags = { "-tags=component" },
         diagnosticsTrigger = "Save",
-        directoryFilters = { "-**/vendor", "-**/node_modules" },
-        semanticTokens = true,
+        directoryFilters = { "-**/vendor", "-**/node_modules", "-**/.git" },
+        staticcheck = false, -- disable heavy staticcheck suite
+        analyses = {
+          unusedparams = true,
+          unusedvariable = true,
+          nilness = true,
+          shadow = true,
+          unreachable = true,
+          printf = true,
+          atomic = true,
+          fillreturns = true,
+          nonewvars = true,
+          assign = true,
+          nilfunc = true,
+        },
       },
     },
   },
