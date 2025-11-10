@@ -1,6 +1,9 @@
 # nvim aliases
 alias v "nvim"
 
+# less aliases
+alias less "less -r"
+
 # make aliases
 alias make "gmake"
 alias m "make"
