@@ -1,7 +1,7 @@
 set theme $argv[1]
 
 switch $theme
-    case 'zenbones' 'zenbones-light' 'rose-pine' 'rose-pine-dawn' 'xeno-pink' 'xeno-mononoke'
+    case 'zenbones' 'zenbones-light' 'rose-pine' 'rose-pine-dawn' 'flatwhite' 'xeno-pink' 'xeno-mononoke' 'gruvbox'
         # Do nothing (allowed)
     case '*'
         echo "Error: '$theme' is not allowed."

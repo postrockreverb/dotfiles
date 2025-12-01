@@ -29,7 +29,7 @@ return {
     view_options = {
       show_hidden = true,
       is_always_hidden = function(name, _)
-        return name == ".DS_Store" or name == ".git"
+        return name == ".DS_Store" or name == ".git" or name == "__pycache__"
       end,
     },
   },
