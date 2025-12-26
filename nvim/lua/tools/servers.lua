@@ -61,6 +61,7 @@ return {
 
   -- python
   pyright = {},
+  ruff = {},
 
   -- shell
   bashls = {},

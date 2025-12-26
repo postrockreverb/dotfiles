@@ -23,6 +23,7 @@ return {
       "templ",
       "c",
       "cpp",
+      "python",
     },
     sync_install = false,
     auto_install = false,

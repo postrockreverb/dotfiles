@@ -36,7 +36,7 @@ return {
   },
 
   -- python
-  black = {
+  ruff = {
     filetypes = { "python" },
   },
 

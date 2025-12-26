@@ -71,7 +71,7 @@ vim.opt.swapfile = false
 
 -- preserving marks between sessions
 vim.opt.shadafile = vim.fn.stdpath("state") .. "/shada/main.shada"
-vim.opt.shada = [[!,'10000,<2000,s100000,h,%,:10000,@10000,/10000]]
+vim.opt.shada = [[!,'10000,<2000,s100000,h,:10000,@10000,/10000]]
 
 -- langmap
 local function escape(str)
