@@ -20,6 +20,24 @@ local function make_fixed_width_banner(text)
   return prefix .. string.rep("-", left) .. core .. string.rep("-", right)
 end
 
+local function goto_next_line_safe()
+  local buf = 0
+  local win = 0
+
+  local row = vim.api.nvim_win_get_cursor(win)[1] -- 1-based
+  local line_count = vim.api.nvim_buf_line_count(buf)
+
+  local target = row + 1
+
+  -- If we're at EOF and there is no next line, append a blank line
+  if target > line_count then
+    vim.api.nvim_buf_set_lines(buf, line_count, line_count, false, { "" })
+    line_count = line_count + 1
+  end
+
+  vim.api.nvim_win_set_cursor(win, { target, 0 })
+end
+
 local m = {}
 
 m.insert = function()
@@ -40,6 +58,8 @@ m.insert = function()
       -- otherwise insert above
       vim.api.nvim_buf_set_lines(0, row - 1, row - 1, false, { banner })
     end
+
+    goto_next_line_safe()
   end)
 end
 
