@@ -36,3 +36,6 @@ fish/completions
 !tmux
 !tmux/**/*
 tmux/plugins
+
+!wallpapers
+!wallpapers/**/*
