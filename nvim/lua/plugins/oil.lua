@@ -1,7 +1,7 @@
 return {
   "stevearc/oil.nvim",
   init = function()
-    vim.api.nvim_create_user_command("Ex", "Oil", { nargs = "?" })
+    vim.api.nvim_create_user_command("Ex", "Oil", { nargs = "?" }) --
   end,
   cmd = {
     "Oil",
@@ -12,6 +12,7 @@ return {
     skip_confirm_for_simple_edits = false,
     prompt_save_on_select_new_entry = true,
     keymaps = {
+      ["q"] = { "actions.close", mode = "n" },
       ["<C-w>q"] = { "actions.close", mode = "n" },
       ["<leader>t/"] = {
         function() require("fzf-lua").live_grep({ cwd = require("oil").get_current_dir() }) end,
@@ -29,7 +30,7 @@ return {
     view_options = {
       show_hidden = true,
       is_always_hidden = function(name, _)
-        return name == ".DS_Store" or name == ".git" or name == "__pycache__"
+        return name == ".DS_Store" or name == ".git" or name == "__pycache__" --
       end,
     },
   },
