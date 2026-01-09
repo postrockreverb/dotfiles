@@ -1,3 +1,9 @@
+local hidden = {
+  [".DS_Store"] = true,
+  [".git"] = true,
+  ["__pycache__"] = true,
+}
+
 return {
   "stevearc/oil.nvim",
   init = function()
@@ -30,7 +36,7 @@ return {
     view_options = {
       show_hidden = true,
       is_always_hidden = function(name, _)
-        return name == ".DS_Store" or name == ".git" or name == "__pycache__" --
+        return hidden[name] --
       end,
     },
   },
