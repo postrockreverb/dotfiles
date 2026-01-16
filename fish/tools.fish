@@ -1,5 +1,6 @@
 # nvim aliases
 alias v "nvim"
+alias :Ex "nvim ."
 
 # less aliases
 alias less "less -r"

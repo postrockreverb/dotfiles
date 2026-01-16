@@ -15,6 +15,11 @@ return {
     filetypes = { "templ" },
   },
 
+  -- rust
+  rustfmt = {
+    filetypes = { "rust" },
+  },
+
   -- c
   ["clang-format"] = {
     filetypes = { "objc", "c", "cpp" },

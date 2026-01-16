@@ -16,7 +16,6 @@ alias brew_bundle_export="brew bundle dump --file=\"~/.config/brew/Brewfile\" --
 
 source ~/.config/fish/prompt.fish
 source ~/.config/fish/git.fish
-source ~/.config/fish/lsp.fish
 source ~/.config/fish/tools.fish
 
 if test -f ~/.config/fish/local.fish
