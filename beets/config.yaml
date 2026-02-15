@@ -1,0 +1,37 @@
+directory: ~/Music/Reverb
+library: ~/Music/Reverb/beet.db
+
+plugins:
+  - musicbrainz
+  # - spotify
+  - filetote
+  - fetchart
+
+spotify:
+  data_source_mismatch_penalty: 0.8
+
+filetote:
+  patterns:
+    artworkdir:
+      - '[sS]cans?/'
+      - '[aA]rtworks?/'
+      - '[cC]overs?/'
+      - '[bB]ooklet/'
+
+    # match loose image files at album root
+    artworkfiles:
+      - 'cover.*'
+      - 'folder.*'
+      - '*.jpg'
+      - '*.JPG'
+      - '*.jpeg'
+      - '*.png'
+      - '*.tif'
+      - '*.tiff'
+      - '*.gif'
+      - '*.pdf'
+
+  # where to put them in your library
+  paths:
+    artworkdir:  $albumpath/artworks/$old_filename
+    artworkfiles: $albumpath/artworks/$old_filename

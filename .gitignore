@@ -9,6 +9,9 @@
 !brew
 !brew/**/*
 
+!beets
+!beets/config.yaml
+
 !fish
 !fish/**/*
 fish/local.fish

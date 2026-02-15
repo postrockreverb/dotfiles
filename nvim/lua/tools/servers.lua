@@ -68,4 +68,7 @@ return {
 
   -- docker
   dockerls = {},
+
+  --
+  -- harper_ls = {},
 }
