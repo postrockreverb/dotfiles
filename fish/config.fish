@@ -9,7 +9,7 @@ if test "$TERM" = "xterm-kitty"
   alias kssh="kitty +kitten ssh"
 end
 
-alias theme="source ~/.config/scripts/theme.fish"
+function theme; source ~/.config/scripts/theme.fish $argv; end
 alias fish_reload_rc="source ~/.config/fish/config.fish"
 alias brew_bundle="brew bundle --file=~/.config/brew/Brewfile"
 alias brew_bundle_export="brew bundle dump --file=\"~/.config/brew/Brewfile\" --force"

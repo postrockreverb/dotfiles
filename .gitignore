@@ -16,7 +16,8 @@
 !fish/**/*
 fish/local.fish
 fish/fish_variables
-fish/completions
+fish/completions/**/*
+!fish/completions/theme.fish
 fish/conf.d
 
 !git
