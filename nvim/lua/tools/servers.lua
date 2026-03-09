@@ -23,7 +23,6 @@ return {
           unusedparams = true,
           unusedvariable = true,
           nilness = true,
-          shadow = true,
           unreachable = true,
           printf = true,
           atomic = true,
@@ -36,6 +35,13 @@ return {
     },
   },
   templ = {},
+
+  -- rust
+  rust_analyzer = {
+    settings = {
+      ["rust-analyzer"] = {},
+    },
+  },
 
   -- c
   clangd = {
