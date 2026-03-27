@@ -20,6 +20,12 @@ fish/completions/**/*
 !fish/completions/theme.fish
 fish/conf.d
 
+!fuzeel
+!fuzeel/**/*
+
+!keyd/
+!keyd/**/*
+
 !git
 !git/**/*
 
@@ -28,6 +34,9 @@ fish/conf.d
 
 !lazygit
 !lazygit/**/*
+
+!niri
+!niri/**/*
 
 !nvim
 !nvim/**/*
@@ -44,3 +53,6 @@ tmux/plugins
 
 !wallpapers
 !wallpapers/**/*
+
+!yambar
+!yambar/**/*

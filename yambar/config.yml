@@ -1,0 +1,53 @@
+bar:
+  height: 64
+  location: top
+  background: 00000000
+  margin: 32
+
+  font: SF Pro Text:style=semibold:size=24
+
+  left:
+    - foreign-toplevel:
+        content:
+          map:
+            conditions:
+              ~activated: {empty: {}}
+              activated:
+                - string: {text: "{app-id}"}
+
+  right:
+    - script:
+        path: ~/.config/yambar/osd.sh
+        content:
+          string: {text: "{msg}", right-margin: 16}
+
+    - niri-language:
+        content:
+          - string: {text: "{language}", right-margin: 16}
+
+    - network:
+        content:
+          map:
+            conditions:
+              state == up:
+                - string: {text: "{ssid}", right-margin: 16}
+
+    - battery:
+        name: macsmc-battery
+        poll-interval: 30000
+        content:
+          map:
+            conditions:
+              state == unknown:
+                - string: {text: "{capacity}% ", right-margin: 16 }
+              state == discharging:
+                - string: {text: "{capacity}% ", right-margin: 16 }
+              state == charging:
+                - string: {text: "{capacity}%+", right-margin: 16 }
+
+    - clock:
+        time-format: "%H:%M"
+        date-format: "%w %d/%m"
+        content:
+          - string: {text: "{time}", right-margin: 16}
+          - string: {text: "{date}"}
