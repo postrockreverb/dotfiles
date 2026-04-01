@@ -5,10 +5,6 @@ alias :Ex "nvim ."
 # less aliases
 alias less "less -r"
 
-# make aliases
-alias make "gmake"
-alias m "make"
-
 # mv aliases
 alias mv "mv -iv"
 

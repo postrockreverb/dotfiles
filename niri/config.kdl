@@ -19,10 +19,11 @@ input {
     }
 
     touchpad {
-        tap
         dwt
+        dwtp
+        drag false
         natural-scroll
-        accel-speed 0.3
+        accel-speed 0.25
         scroll-factor 0.16
         left-handed
     }
