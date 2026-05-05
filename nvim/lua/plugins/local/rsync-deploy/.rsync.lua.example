@@ -1,0 +1,52 @@
+-- Copy this file to `.rsync.lua` at your project root and edit to taste.
+-- It is a Lua chunk that must return a config table.
+
+return {
+  remote = {
+    host = "deploy@example.com",
+    path = "/var/www/myproject",
+  },
+
+  ssh = {
+    port = 22,
+    key = "~/.ssh/id_ed25519",
+    options = {
+      "-o", "StrictHostKeyChecking=accept-new",
+      "-o", "ServerAliveInterval=30",
+    },
+  },
+
+  -- Passed verbatim to rsync. -a = archive, -z = compress, -v = verbose.
+  -- --delete removes files on the remote that no longer exist locally.
+  -- --itemize-changes prints a per-file summary of what changed.
+  options = {
+    "-avz",
+    "--delete",
+    "--itemize-changes",
+  },
+
+  -- Whitelist (rsync --include). Emitted before the blacklist, so these
+  -- patterns "rescue" matches that the blacklist would otherwise drop.
+  -- Use `***` to descend into a matched directory.
+  whitelist = {
+    "src/***",
+    "public/***",
+    "package.json",
+    "package-lock.json",
+  },
+
+  -- Blacklist (rsync --exclude). Standard rsync glob syntax:
+  --   *        — any chars except `/`
+  --   **       — any chars including `/`
+  --   /name    — anchored to the transfer root
+  --   name/    — directories only
+  blacklist = {
+    ".git/",
+    "node_modules/",
+    "dist/",
+    ".DS_Store",
+    "*.log",
+    "*.swp",
+    ".env*",
+  },
+}
