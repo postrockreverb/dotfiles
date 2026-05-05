@@ -6,6 +6,13 @@ plugins:
   # - spotify
   - filetote
   - fetchart
+  - embedart
+  - playlist
+  - importfeeds
+
+paths:
+  default: $albumartist/$album/$track $title
+  singleton: $albumartist/Non-Album/$title
 
 spotify:
   data_source_mismatch_penalty: 0.8
@@ -33,5 +40,20 @@ filetote:
 
   # where to put them in your library
   paths:
+    default: $albumartist/$album/$track $title
     artworkdir:  $albumpath/artworks/$old_filename
     artworkfiles: $albumpath/artworks/$old_filename
+
+embedart:
+  compare_threshold: 10
+
+playlist:
+  auto: yes
+  relative_to: ~/Music/Playlists
+  playlist_dir: ~/Music/Playlists
+
+importfeeds:
+  formats: m3u_session
+  dir: ~/Music/Playlists
+  relative_to: ~/Music/Playlists
+  m3u_name: imported
