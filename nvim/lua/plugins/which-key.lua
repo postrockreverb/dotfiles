@@ -24,7 +24,7 @@ return {
 
       -- buffers
       { "<leader>b", group = "Buffers" },
-      { "<leader>bp", '<cmd>term glow "%"<cr>', desc = "Preview in Glow" },
+      { "<leader>bp", require("plugins.utils.glow").preview, desc = "Preview in Glow" },
 
       -- quickfix list
       { "<leader>q", group = "Quickfix list" },
