@@ -9,7 +9,7 @@ return {
     oldfiles = {
       cwd_only = true,
       stat_file = true,
-      include_current_session = true,
+      include_current_session = false,
     },
     previewers = {
       bat = {
@@ -78,6 +78,50 @@ return {
         })
       end,
       desc = "Zoxide",
+    },
+    {
+      "<leader>th",
+      function()
+        local marks = require("plugins.local.harpoon").list()
+        if #marks == 0 then
+          vim.notify("harpoon: no marks", vim.log.levels.WARN)
+          return
+        end
+
+        local utils = require("fzf-lua.utils")
+        local items, lookup = {}, {}
+        for _, mark in ipairs(marks) do
+          local key = mark.path .. ":" .. mark.line
+          local display = mark.has_line and key or mark.path
+          if mark.desc then
+            display = display .. " " .. utils.ansi_from_hl("Directory", mark.desc)
+          end
+          table.insert(items, key .. ":" .. display)
+          lookup[key] = mark
+        end
+
+        require("fzf-lua").fzf_exec(items, {
+          prompt = "Harpoon > ",
+          preview = "bat --style=numbers --color=always --highlight-line {2} {1}",
+          actions = {
+            ["default"] = function(selected)
+              local key = selected[1] and selected[1]:match("^([^:]+:[^:]+)")
+              local mark = key and lookup[key]
+              if not mark then
+                return
+              end
+              vim.cmd("edit +" .. mark.line .. " " .. vim.fn.fnameescape(mark.path) .. "| normal! zz")
+            end,
+          },
+          fzf_opts = {
+            ["--delimiter"] = ":",
+            ["--preview-window"] = "up:+{2}-15:noborder",
+            ["--with-nth"] = "3..",
+            ["--ansi"] = "",
+          },
+        })
+      end,
+      desc = "Harpoon",
     },
 
     { "gr", function() require("fzf-lua").lsp_references() end, desc = "Lsp references" },

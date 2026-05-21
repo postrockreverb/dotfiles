@@ -1,0 +1,10 @@
+# Example .harpoon file
+# Place this file in your project root as `.harpoon`
+# Format: file:line description (description is optional)
+
+src/main.lua:42
+README.md:10 project startup info
+lua/config.lua:15 plugin configuration
+internal/usecase/users/get_users_batch.go:274 setProfile
+
+# Empty lines and lines starting with # are ignored
