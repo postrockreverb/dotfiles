@@ -51,6 +51,9 @@ return {
       { "<leader>w", group = "Window" },
       { "<leader>w2", function() require("plugins.utils.splits").fraction(0.50) end, desc = "Window: 1/2 width" },
       { "<leader>w3", function() require("plugins.utils.splits").fraction(0.34) end, desc = "Window: 1/3 width" },
+
+      -- cd to current file directory
+      { "<leader>cd", function() vim.fn.feedkeys(":cd " .. vim.fn.expand("%:p:h")) end, desc = "Cd to current file directory" },
     })
   end,
 }

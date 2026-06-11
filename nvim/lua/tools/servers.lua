@@ -15,7 +15,7 @@ return {
   gopls = {
     settings = {
       gopls = {
-        buildFlags = { "-tags=component" },
+        buildFlags = { "-tags=integration" },
         diagnosticsTrigger = "Save",
         directoryFilters = { "-**/vendor", "-**/node_modules", "-**/.git" },
         staticcheck = false, -- disable heavy staticcheck suite

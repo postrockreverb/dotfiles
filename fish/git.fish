@@ -8,6 +8,7 @@ alias gp="git push"
 alias gpf="git push -f"
 
 alias gf="git fetch"
+alias gfm="git fetch origin master"
 
 alias gc="git checkout"
 
