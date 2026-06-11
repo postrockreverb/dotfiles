@@ -28,6 +28,11 @@ alias blim "sudo bclm write 80"
 alias bunlim "sudo bclm write 100"
 alias bget "bclm read"
 
+# disk usage
+function diskusage
+  du -h -d 1 $argv[1] | sort -hr
+end
+
 # reveal
 function reveal
   set target $argv[1]
