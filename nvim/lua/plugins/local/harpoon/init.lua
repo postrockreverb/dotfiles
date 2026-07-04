@@ -1,6 +1,6 @@
 -- Simple harpoon-like marks manager.
 --
--- Reads marks from a `.harpoon` file at nvim cwd. Each line is either:
+-- Reads marks from a `.nvim/harpoon` file at nvim cwd. Each line is either:
 --   src/main.lua                -- file path (relative to cwd)
 --   src/main.lua description    -- file path with description
 --   src/main.lua:42             -- file path with line number
@@ -11,7 +11,7 @@
 local m = {}
 
 local function find_file(cwd)
-  local path = cwd .. "/.harpoon"
+  local path = cwd .. "/.nvim/harpoon"
   if vim.fn.filereadable(path) == 1 then
     return path
   end

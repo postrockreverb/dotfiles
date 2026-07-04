@@ -29,6 +29,8 @@ return {
       -- quickfix list
       { "<leader>q", group = "Quickfix list" },
       { "<leader>ql", "<cmd>copen<cr>", desc = "Open" },
+      { "<leader>qa", require("plugins.utils.qflist").add_current_line, desc = "Add current line" },
+      { "<leader>qc", require("plugins.utils.qflist").clear, desc = "Clear" },
       { "[q", "<cmd>cprev<cr>zz", desc = "Previous quickfix list item" },
       { "]q", "<cmd>cnext<cr>zz", desc = "Next quickfix list item" },
 

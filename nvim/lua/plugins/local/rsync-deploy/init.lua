@@ -1,6 +1,6 @@
 -- Sync the current working directory to a remote host via rsync.
 --
--- Configuration is read from a `.rsync.lua` file at nvim cwd. The file is a
+-- Configuration is read from a `.nvim/rsync.lua` file at nvim cwd. The file is a
 -- Lua chunk that returns a table with this shape:
 --
 --   return {
@@ -21,7 +21,7 @@
 local m = {}
 
 local function find_config(cwd)
-  local path = cwd .. "/.rsync.lua"
+  local path = cwd .. "/.nvim/rsync.lua"
   if vim.fn.filereadable(path) == 1 then
     return path
   end
@@ -106,7 +106,7 @@ m.sync = function()
   local cwd = vim.fn.getcwd()
   local config_path = find_config(cwd)
   if not config_path then
-    vim.notify("rsync-deploy: no .rsync.lua file in " .. cwd, vim.log.levels.ERROR)
+    vim.notify("rsync-deploy: no .nvim/rsync.lua file in " .. cwd, vim.log.levels.ERROR)
     return
   end
 

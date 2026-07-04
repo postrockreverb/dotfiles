@@ -11,6 +11,9 @@ return {
       stat_file = true,
       include_current_session = false,
     },
+    grep = {
+      hidden = true,
+    },
     previewers = {
       bat = {
         theme = vim.g.theme,
@@ -29,15 +32,15 @@ return {
       preview = {
         default = "bat",
         layout = "vertical",
-        vertical = "up",
+        vertical = "up:60%",
         border = "noborder",
       },
     },
     keymap = {
       fzf = {
         true,
-        ["ctrl-d"] = "preview-page-down",
-        ["ctrl-u"] = "preview-page-up",
+        ["ctrl-d"] = "preview-half-page-down",
+        ["ctrl-u"] = "preview-half-page-up",
       },
     },
   },
