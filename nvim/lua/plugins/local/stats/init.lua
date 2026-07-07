@@ -178,14 +178,21 @@ local function discover(cwd)
 end
 
 -- Fold the elapsed time of the current segment into today's PENDING bucket of
--- every tracked target, then reset the segment start. Uses a monotonic clock so
--- it is not skewed by wall-clock changes (and does not count time while the
--- machine is asleep). Time is attributed to the date at fold time, so a session
--- crossing midnight splits across days (accurate to within one flush interval).
+-- every tracked target, then reset the segment start. Time is attributed to the
+-- date at fold time, so a session crossing midnight splits across days (accurate
+-- to within one flush interval).
+--
+-- uv.hrtime() is monotonic but, on macOS, is backed by mach_continuous_time(),
+-- which keeps advancing while the machine is asleep -- so the raw delta DOES
+-- include suspend time. Guard against that: while nvim is actually running the
+-- flush timer folds at least once per flush interval, so a segment much longer
+-- than that interval means the process was frozen (system sleep/suspend, or a
+-- long event-loop stall) rather than real editing. Such segments are dropped.
 local function fold()
   local now = uv.hrtime()
   local delta = (now - state.seg_start) / 1e9 -- seconds
-  if delta > 0 then
+  local max_s = (state.interval / 1000) * 2 -- generous margin over one interval
+  if delta > 0 and delta <= max_s then
     local date = today()
     for _, tgt in ipairs(state.targets) do
       local p = day_rec(tgt.pending, date)
@@ -411,5 +418,7 @@ return M
 --    per-frame or per-keystroke work.
 --  * Focused/background split is event-driven (FocusGained/FocusLost), which
 --    only fire when you actually switch terminal tabs.
---  * Durations use a monotonic clock, so time the laptop spends asleep is not
---    counted -- it reflects real editing time only.
+--  * Durations use a monotonic clock (uv.hrtime). On macOS that clock keeps
+--    advancing during sleep, so fold() drops any segment longer than ~2x the
+--    flush interval -- suspend time (and long stalls) is not counted, leaving
+--    real editing time only.
