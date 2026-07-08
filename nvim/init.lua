@@ -7,6 +7,7 @@ local themes_tbl = {
   ["xeno-pink"] = true,
   ["xeno-mononoke"] = true,
   ["gruvbox"] = true,
+  ["gruvbox-material"] = true,
 }
 
 local theme = os.getenv("THEME")
