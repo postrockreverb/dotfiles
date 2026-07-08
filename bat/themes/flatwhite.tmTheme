@@ -20,7 +20,7 @@
         <key>lineHighlight</key><string>#F1ECE4</string>
         <key>selection</key><string>#DCD3C6</string>
         <key>gutter</key><string>#F7F3EE</string>
-        <key>gutterForeground</key><string>#B9A992</string>
+        <key>gutterForeground</key><string>#998B79</string>
       </dict>
     </dict>
     <dict>
@@ -28,8 +28,8 @@
       <key>scope</key><string>comment, punctuation.definition.comment</string>
       <key>settings</key>
       <dict>
-        <key>foreground</key><string>#B9A992</string>
-        <key>fontStyle</key><string>italic</string>
+        <key>foreground</key><string>#766957</string>
+        <key>background</key><string>#F1ECE4</string>
       </dict>
     </dict>
     <dict>
@@ -38,7 +38,7 @@
       <key>settings</key>
       <dict>
         <key>foreground</key><string>#525643</string>
-        <key>background</key><string>#E3EAC3</string>
+        <key>background</key><string>#E2E9C1</string>
       </dict>
     </dict>
     <dict>
@@ -55,7 +55,7 @@
       <key>settings</key>
       <dict>
         <key>foreground</key><string>#4C5361</string>
-        <key>background</key><string>#DEE5F2</string>
+        <key>background</key><string>#DDE4F2</string>
       </dict>
     </dict>
     <dict>
@@ -64,7 +64,7 @@
       <key>settings</key>
       <dict>
         <key>foreground</key><string>#614C61</string>
-        <key>background</key><string>#F2DEF2</string>
+        <key>background</key><string>#F1DDF1</string>
       </dict>
     </dict>
     <dict>
@@ -106,7 +106,7 @@
       <key>settings</key>
       <dict>
         <key>foreground</key><string>#465953</string>
-        <key>background</key><string>#D1EBE3</string>
+        <key>background</key><string>#D2EBE3</string>
       </dict>
     </dict>
     <dict>
@@ -115,7 +115,7 @@
       <key>settings</key>
       <dict>
         <key>foreground</key><string>#614C61</string>
-        <key>background</key><string>#F2DEF2</string>
+        <key>background</key><string>#F1DDF1</string>
       </dict>
     </dict>
     <dict>
@@ -140,7 +140,7 @@
       <key>scope</key><string>invalid, invalid.illegal</string>
       <key>settings</key>
       <dict>
-        <key>foreground</key><string>#FF1414</string>
+        <key>foreground</key><string>#DE1111</string>
       </dict>
     </dict>
     <dict>
@@ -157,7 +157,7 @@
       <key>scope</key><string>markup.underline.link, string.other.link</string>
       <key>settings</key>
       <dict>
-        <key>foreground</key><string>#7382A0</string>
+        <key>foreground</key><string>#63708A</string>
         <key>fontStyle</key><string>underline</string>
       </dict>
     </dict>
@@ -184,7 +184,7 @@
       <key>scope</key><string>markup.inserted</string>
       <key>settings</key>
       <dict>
-        <key>foreground</key><string>#2DB448</string>
+        <key>foreground</key><string>#208033</string>
       </dict>
     </dict>
     <dict>
@@ -192,7 +192,7 @@
       <key>scope</key><string>markup.deleted</string>
       <key>settings</key>
       <dict>
-        <key>foreground</key><string>#FF1414</string>
+        <key>foreground</key><string>#DE1111</string>
       </dict>
     </dict>
     <dict>
@@ -200,7 +200,7 @@
       <key>scope</key><string>markup.changed</string>
       <key>settings</key>
       <dict>
-        <key>foreground</key><string>#7A5306</string>
+        <key>foreground</key><string>#795306</string>
       </dict>
     </dict>
   </array>

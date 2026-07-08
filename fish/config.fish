@@ -22,6 +22,10 @@ if test -f ~/.config/fish/local.fish
   source ~/.config/fish/local.fish
 end
 
+if set -q THEME; and test -f ~/.config/fish/themes/$THEME.fish
+  source ~/.config/fish/themes/$THEME.fish
+end
+
 zoxide init fish | source
 
 if status is-interactive
