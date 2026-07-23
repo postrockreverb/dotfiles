@@ -25,8 +25,35 @@ log "Starting cache cleanup"
 remove_dir "$HOME/.bun/install/cache"
 remove_dir "$HOME/.yarn/berry/cache"
 remove_dir "$HOME/.npm/_cacache"
+
 remove_dir "$HOME/.cache/uv"
 remove_dir "$HOME/.cache/yarn"
+remove_dir "$HOME/.cache/pip"
+remove_dir "$HOME/.cache/pnpm"
+
+remove_dir "$HOME/.cargo/registry/cache"
+remove_dir "$HOME/.cargo/git/db"
+
+log "Cleaning Cargo cache"
+cargo cache --autoclean || true
+
+log "Pruning pnpm store"
+pnpm store prune || true
+
+log "Cleaning npm cache"
+npm cache clean --force || true
+
+log "Cleaning Bun cache"
+bun pm cache rm || true
+
+log "Cleaning Homebrew cache"
+brew cleanup --prune=all
+
+log "Removing unused Homebrew dependencies"
+brew autoremove
+
+log "Cleaning pip cache"
+python3 -m pip cache purge || true
 
 log "Cleaning Go module cache"
 go clean --modcache
