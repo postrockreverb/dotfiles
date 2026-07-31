@@ -50,9 +50,10 @@ return {
       { "<leader>yP", require("plugins.utils.yank").pathlinenr, desc = "File path with line number" },
 
       -- windows
-      { "<leader>w", group = "Window" },
-      { "<leader>w2", function() require("plugins.utils.splits").fraction(0.50) end, desc = "Window: 1/2 width" },
-      { "<leader>w3", function() require("plugins.utils.splits").fraction(0.34) end, desc = "Window: 1/3 width" },
+      { "<C-w>1", function() require("plugins.utils.splits").fraction(0.20) end, desc = "Window: 1/5 width" },
+      { "<C-w>2", function() require("plugins.utils.splits").fraction(0.40) end, desc = "Window: 2/5 width" },
+      { "<C-w>3", function() require("plugins.utils.splits").fraction(0.60) end, desc = "Window: 3/5 width" },
+      { "<C-w>4", function() require("plugins.utils.splits").fraction(0.80) end, desc = "Window: 4/5 width" },
 
       -- cd to current file directory
       { "<leader>cd", function() vim.fn.feedkeys(":cd " .. vim.fn.expand("%:p:h")) end, desc = "Cd to current file directory" },

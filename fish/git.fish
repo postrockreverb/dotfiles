@@ -37,27 +37,6 @@ alias gl="git log --graph --pretty=format:\"%C(red)%h%C(reset)%C(yellow)%d%Crese
 alias gcls="git clean -df && git checkout -- ."
 alias gprunemegred="git branch --merged | egrep -v '(^\*|master|dev|list)' | xargs git branch -d"
 
-# Interactive git staging with fzf.
-function tgs
-  git --no-optional-locks status --porcelain=v1 | sed -E 's/^(.)(.) /\1 \2  /' | \
-    fzf \
-      --ansi \
-      --info=inline-right \
-      --height=100% \
-      --layout=reverse \
-      --border=none \
-      --pointer="" \
-      --preview-window='up,60%,border-none' \
-      --preview 'cd (git rev-parse --show-toplevel); set f (string sub -s 6 -- {}); begin; git diff --cached -- "$f"; git diff -- "$f"; end | delta --color-only --line-numbers --line-numbers-left-format=\'\' --line-numbers-right-format=\'{np:>4} \' --detect-dark-light=never --paging=never --width=$FZF_PREVIEW_COLUMNS' \
-      --header="+ -  <left> to stage | <right> to unstage | <ctrl-x> to reset" \
-      --bind 'left:execute-silent(cd (git rev-parse --show-toplevel); git add -- (string sub -s 6 -- {}))+reload(git --no-optional-locks status --porcelain=v1 | sed -E "s/^(.)(.) /\1 \2  /")' \
-      --bind 'right:execute-silent(cd (git rev-parse --show-toplevel); git restore --staged -- (string sub -s 6 -- {}))+reload(git --no-optional-locks status --porcelain=v1 | sed -E "s/^(.)(.) /\1 \2  /")' \
-      --bind 'ctrl-x:execute-silent(cd (git rev-parse --show-toplevel); git restore --staged --worktree -- (string sub -s 6 -- {}))+reload(git --no-optional-locks status --porcelain=v1 | sed -E "s/^(.)(.) /\1 \2  /")' \
-      --bind 'ctrl-d:preview-half-page-down' \
-      --bind 'ctrl-u:preview-half-page-up' \
-      --bind 'ctrl-f:change-preview-window(up,99%,border-none|hidden|up,60%,border-none)'
-end
-
 # Interactive git branch switcher with fzf.
 function tgb
   git branch --format='%(refname:short)' | \

@@ -66,7 +66,6 @@ return {
     { "<leader>tD", function() require("fzf-lua").diagnostics_workspace() end, desc = "Workspace diagnostics" },
     { "<leader>ts", function() require("fzf-lua").lsp_document_symbols() end, desc = "Symbols" },
     { "<leader>tS", function() require("fzf-lua").lsp_live_workspace_symbols() end, desc = "Workspace symbols" },
-    { "<leader>tg", function() require("fzf-lua").git_status() end, desc = "Git files" },
     { "<leader>tl", function() require("fzf-lua").resume() end, desc = "Resume last" },
     {
       "<leader>tz",
