@@ -20,9 +20,6 @@ vim.opt.expandtab = true
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 
--- not display a ~ for blank lines
-vim.opt.fillchars:append("eob: ")
-
 -- search
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
