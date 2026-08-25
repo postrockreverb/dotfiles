@@ -176,8 +176,8 @@ m.close = function()
 end
 
 -- Hand the split over to a real file: the window stays, the preview lets go of
--- it. The locks it kept on itself have to come off, or nothing else can be put
--- there or resized. Returns the window, or nil if there was no preview.
+-- it. 'winfixbuf' has to come off here or nothing can be put there. Returns
+-- the window, or nil if there was no preview.
 m.takeover = function()
   if not alive() then
     return nil
@@ -185,7 +185,6 @@ m.takeover = function()
 
   local target = win
   vim.wo[target].winfixbuf = false
-  vim.wo[target].winfixwidth = false
   win, shown, last = -1, nil, nil
   return target
 end
@@ -207,9 +206,10 @@ local function place(buf)
     vim.cmd("botright vsplit")
     win = vim.api.nvim_get_current_win()
     vim.api.nvim_win_set_buf(win, buf)
+    -- The tree keeps its slice, the preview takes the rest. Width is set once
+    -- here and never locked; afterwards vim's normal resizing rules apply.
     if vim.api.nvim_win_is_valid(from) then
       vim.api.nvim_win_set_width(from, config.width())
-      vim.wo[from][0].winfixwidth = true
     end
   end
 
@@ -217,7 +217,6 @@ local function place(buf)
   vim.wo[win][0].relativenumber = false
   vim.wo[win][0].signcolumn = "no"
   vim.wo[win][0].wrap = false
-  vim.wo[win].winfixwidth = true
   vim.wo[win].winfixbuf = true
 
   if vim.api.nvim_win_is_valid(from) then

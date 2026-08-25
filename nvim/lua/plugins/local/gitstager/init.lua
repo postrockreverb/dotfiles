@@ -241,25 +241,13 @@ local function open_file(cmd)
         return vim.cmd.edit(vim.fn.fnameescape(path))
       end
 
-      -- With no preview to inherit, build the same shape: a quarter for the
-      -- tree, the rest for the file. The new window is born at its final width
-      -- rather than resized into place, because nvim pays for a late resize out
-      -- of every neighbour -- this way only the tree gives anything up.
+      -- With no preview to inherit, build the same shape: the tree keeps its
+      -- slice, the file takes the rest. Width is set once here and never
+      -- locked; afterwards vim's normal resizing rules apply.
       local tree_win = vim.api.nvim_get_current_win()
-      local have = vim.api.nvim_win_get_width(tree_win)
-      local give = have - config.width() - 1
-      if give < 10 then
-        -- Too narrow to hand over a quarter, so halve what there is. Still with
-        -- a count, so the space comes out of this window and no other.
-        give = math.max(1, math.floor(have / 2))
-      end
-
-      -- A count on the split is what pins the width. Do not touch
-      -- 'equalalways' to help: turning it off makes nvim ignore the count and
-      -- halve the window instead.
-      vim.cmd(("%dvsplit %s"):format(give, vim.fn.fnameescape(path)))
+      vim.cmd(("vsplit %s"):format(vim.fn.fnameescape(path)))
       if vim.api.nvim_win_is_valid(tree_win) then
-        vim.wo[tree_win][0].winfixwidth = true
+        vim.api.nvim_win_set_width(tree_win, config.width())
       end
       return
     end
