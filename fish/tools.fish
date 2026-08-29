@@ -19,6 +19,9 @@ alias cat "bat --plain"
 alias ll "eza --long --icons=always --no-user --no-permissions --no-time --group-directories-first"
 alias lla "ll -a"
 
+# zmx session picker
+alias zxc "~/.config/scripts/zxc.fish"
+
 # sleep aliases
 alias sleep_in "sudo shutdown -s -q"
 alias sleep_cancel "sudo pkill shutdown"

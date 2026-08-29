@@ -14,8 +14,9 @@ function fish_prompt
   set -l arrow "λ"
   set -l cwd $blue(basename (prompt_pwd))
 
-  if [ (_git_branch_name) ]
-    set git_info $green(_git_branch_name)
+  set -l git_branch (_git_branch_name)
+  if [ "$git_branch" ]
+    set git_info "$green$git_branch"
     set git_info ":$git_info"
 
     if [ (_is_git_dirty) ]
@@ -24,5 +25,9 @@ function fish_prompt
     end
   end
 
-  echo -n -s $cwd $git_info $normal ' ' $arrow ' '
+  if set -q ZMX_SESSION
+    set zmx_info "[$ZMX_SESSION] "
+  end
+
+  echo -n -s $zmx_info $cwd $git_info $normal ' ' $arrow ' '
 end
