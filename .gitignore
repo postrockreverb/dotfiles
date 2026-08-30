@@ -18,6 +18,7 @@ fish/local.fish
 fish/fish_variables
 fish/completions/**/*
 !fish/completions/theme.fish
+!fish/completions/zxc.fish
 fish/conf.d
 
 !fuzeel
