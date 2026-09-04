@@ -204,10 +204,45 @@ function _zxc_create
     zmx attach $id $argv[2..]
 end
 
+function _zxc_set_cwd
+    # zmx renders the session through its own VT, so nothing the inner
+    # shell emits reaches the terminal: while attached, the terminal
+    # still believes the cwd is wherever zxc was run from. Point it at
+    # the session's directory so kitty's new_tab_with_cwd opens there.
+    #
+    # Both halves are needed. The cd fixes what a terminal reads from
+    # the foreground process (zmx attach inherits this process's cwd);
+    # the OSC 7 fixes what a terminal tracks from the output stream.
+    #
+    # The tab name is left alone on purpose. A terminal labels the tab
+    # from the cwd it was last told about, so it names itself after the
+    # session's directory; setting a title here only fought with that.
+    set -l dir ""
+
+    for line in (_zxc_sessions)
+        set -l parts (string split \t -- $line)
+
+        if test "$parts[1]" = "$argv[1]"
+            set dir "$parts[3]"
+            break
+        end
+    end
+
+    test -n "$dir" -a -d "$dir"; or return
+
+    cd $dir
+
+    printf '\e]7;file://%s%s\e\\' $hostname (
+        string replace -a ' ' '%20' -- $dir
+    )
+end
+
 function _zxc_attach
     set -l target (_zxc_resolve "$argv[1]")
 
     if test -n "$target"
+        _zxc_set_cwd "$target"
+
         ZMX_SESSION_PREFIX= zmx attach "$target" $argv[2..]
         return
     end
@@ -408,7 +443,11 @@ function zxc
 
     if test -n "$selected" -a -z "$force_new"
         # Field 1 is already the complete name.
-        ZMX_SESSION_PREFIX= zmx attach (string split -f1 \t -- "$selected")
+        set -l name (string split -f1 \t -- "$selected")
+
+        _zxc_set_cwd "$name"
+
+        ZMX_SESSION_PREFIX= zmx attach "$name"
         return
     end
 

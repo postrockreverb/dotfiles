@@ -2,6 +2,8 @@
 alias v "nvim"
 alias nano "nvim"
 alias :Ex "nvim ."
+export EDITOR=nvim
+export VISUAL=nvim
 
 # less aliases
 alias less "less -r"
