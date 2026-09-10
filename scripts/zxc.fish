@@ -46,11 +46,37 @@ function _zxc_display
     return 1
 end
 
+function _zxc_cwds
+    # "pid<TAB>cwd" for each pid that still has a process. A session's
+    # start_dir is only where it began; the shell inside it cds, and
+    # macOS has no /proc, so lsof is the only way to read that. One
+    # batched call covers the whole list in a few ms.
+    test (count $argv) -gt 0; or return
+
+    set -l pid ""
+
+    lsof -a -d cwd -p (string join , $argv) -Fpn 2>/dev/null | while read -l line
+        set -l value (string sub -s2 -- $line)
+
+        switch (string sub -l1 -- $line)
+            case p
+                set pid $value
+            case n
+                test -n "$pid"; or continue
+
+                printf '%s\t%s\n' $pid $value
+                set pid ""
+        end
+    end
+end
+
 function _zxc_sessions
     # One "name<TAB>display<TAB>dir" row per session, filtered by
     # $ZMX_SESSION_PREFIX. The picker, name resolution and completions
     # all read this, so they agree on what a session is called.
     set -l prefix "$ZMX_SESSION_PREFIX"
+    set -l rows
+    set -l pids
 
     # Each zmx list line is tab-separated k=v fields: name, pid, clients,
     # created, start_dir, then optional ones (ended, exit_code, cmd) and
@@ -59,6 +85,7 @@ function _zxc_sessions
     zmx list 2>/dev/null | while read -l line
         set -l name ""
         set -l dir ""
+        set -l pid ""
         set -l alias ""
         set -l ord ""
         set -l created 0
@@ -75,6 +102,8 @@ function _zxc_sessions
                     set name $kv[2]
                 case start_dir
                     set dir $kv[2]
+                case pid
+                    set pid $kv[2]
                 case alias
                     set alias $kv[2]
                 case ord
@@ -114,7 +143,36 @@ function _zxc_sessions
             set key (printf '1:%06d' $ord)
         end
 
-        printf '%s\t%s\t%s\t%s\n' "$key" "$name" "$display" "$dir"
+        # Buffered rather than piped straight into sort: the cwds are
+        # worth one lsof call for the whole list, and that needs every
+        # pid up front.
+        set -a rows (printf '%s\t%s\t%s\t%s\t%s' "$key" "$name" "$display" "$pid" "$dir")
+        set -a pids $pid
+    end
+
+    test (count $rows) -gt 0; or return
+
+    set -l cwd_pids
+    set -l cwd_dirs
+
+    for line in (_zxc_cwds $pids)
+        set -l parts (string split \t -- $line)
+
+        set -a cwd_pids $parts[1]
+        set -a cwd_dirs $parts[2]
+    end
+
+    for row in $rows
+        set -l parts (string split \t -- $row)
+
+        # A session whose process has ended has no cwd to read, so it
+        # keeps showing the directory it started in.
+        set -l dir $parts[5]
+        set -l i (contains -i -- "$parts[4]" $cwd_pids)
+
+        test -n "$i"; and set dir $cwd_dirs[$i]
+
+        printf '%s\t%s\t%s\t%s\n' $parts[1] $parts[2] $parts[3] "$dir"
     end | LC_ALL=C sort -t\t -k1,1 -s | cut -f2-
 end
 
@@ -123,7 +181,17 @@ function _zxc_candidates
     # single field. Field 1 is the complete session name, hidden by
     # --with-nth, so {1} always names something zmx can resolve.
     _zxc_sessions | while read -l -d \t name display dir
-        printf '%s\t%-20s  %s\n' "$name" "$display" "$dir"
+        # Shortened for the eye only. Everything that acts on a
+        # directory reads _zxc_sessions, which keeps it absolute.
+        set -l pretty "$dir"
+
+        if string match -q -- "$HOME" "$dir"; or string match -q -- "$HOME/*" "$dir"
+            set pretty '~'(
+                string sub -s (math (string length -- "$HOME") + 1) -- "$dir"
+            )
+        end
+
+        printf '%s\t%-20s  %s\n' "$name" "$display" "$pretty"
     end
 end
 

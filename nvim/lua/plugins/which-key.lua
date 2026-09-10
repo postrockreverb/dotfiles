@@ -48,6 +48,7 @@ return {
       { "<leader>y", group = "Yank" },
       { "<leader>yp", require("plugins.utils.yank").path, desc = "File path" },
       { "<leader>yP", require("plugins.utils.yank").pathlinenr, desc = "File path with line number" },
+      { "<leader>yq", require("plugins.utils.yank").qualified, desc = "Qualified symbol name" },
 
       -- windows
       { "<C-w>1", function() require("plugins.utils.splits").fraction(0.20) end, desc = "Window: 1/5 width" },
