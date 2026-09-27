@@ -35,6 +35,9 @@ return {
       "python",
       "yaml",
       "groovy",
+      "gdscript",
+      "godot_resource",
+      "gdshader",
     }
 
     local already_installed = require("nvim-treesitter.config").get_installed()
