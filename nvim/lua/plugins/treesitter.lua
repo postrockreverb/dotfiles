@@ -34,6 +34,7 @@ return {
       "cpp",
       "python",
       "yaml",
+      "groovy",
     }
 
     local already_installed = require("nvim-treesitter.config").get_installed()

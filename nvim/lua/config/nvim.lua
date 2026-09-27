@@ -12,7 +12,7 @@ vim.opt.relativenumber = true
 -- width of a tab
 vim.opt.shiftwidth = 2
 vim.opt.tabstop = 2
-vim.opt.softtabstop = 2
+vim.opt.softtabstop = -1
 vim.opt.smartindent = true
 vim.opt.expandtab = true
 
@@ -87,3 +87,7 @@ local langmap = vim.fn.join({
 }, ",")
 
 vim.opt.langmap = langmap
+
+-- trailing spaces highlight
+vim.api.nvim_set_hl(0, "TrailingWhitespace", { link = "DiffDelete" })
+vim.fn.matchadd("TrailingWhitespace", [[\s\+$]])
