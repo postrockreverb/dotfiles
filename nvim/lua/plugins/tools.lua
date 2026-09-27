@@ -17,10 +17,10 @@ return {
       }
 
       require("mason-tool-installer").setup({
-        ensure_installed = tools.ensure_installed,
+        ensure_installed = tools.ensure_installed(),
       })
 
-      for name, cfg in pairs(tools.servers) do
+      for name, cfg in pairs(tools.servers()) do
         cfg.capabilities = vim.tbl_deep_extend("force", {}, capabilities, cfg.capabilities or {})
         vim.lsp.config(name, cfg)
         vim.lsp.enable(name)
@@ -34,15 +34,15 @@ return {
       { "<leader>l", function() require("conform").format() end, desc = "Format buffer", mode = { "n", "v" } }, -- TODO: format visual
     },
     opts = {
-      formatters = tools.formatters_settings,
-      formatters_by_ft = tools.formatters_by_ft,
+      formatters = tools.formatters_settings(),
+      formatters_by_ft = tools.formatters_by_ft(),
     },
   },
   {
     "mfussenegger/nvim-lint",
     event = { "BufReadPre", "BufNewFile" },
     config = function()
-      require("lint").linters_by_ft = tools.linters_by_ft
+      require("lint").linters_by_ft = tools.linters_by_ft()
 
       local group = vim.api.nvim_create_augroup("lint", { clear = true })
 

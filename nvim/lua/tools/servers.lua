@@ -75,6 +75,11 @@ return {
   -- docker
   dockerls = {},
 
+  -- godot
+  gdscript = {
+    ensure_installed = false,
+  },
+
   --
   -- harper_ls = {},
 }
