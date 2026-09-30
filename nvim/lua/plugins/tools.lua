@@ -9,6 +9,7 @@ return {
       "WhoIsSethDaniel/mason-tool-installer.nvim",
       "saghen/blink.cmp",
     },
+    event = { "BufReadPre", "BufNewFile" },
     config = function()
       local capabilities = require("blink.cmp").get_lsp_capabilities()
       capabilities.textDocument.foldingRange = {
@@ -18,7 +19,9 @@ return {
 
       require("mason-tool-installer").setup({
         ensure_installed = tools.ensure_installed(),
+        run_on_start = false,
       })
+      vim.defer_fn(function() require("mason-tool-installer").check_install() end, 0)
 
       for name, cfg in pairs(tools.servers()) do
         cfg.capabilities = vim.tbl_deep_extend("force", {}, capabilities, cfg.capabilities or {})
