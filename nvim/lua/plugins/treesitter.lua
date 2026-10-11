@@ -38,6 +38,8 @@ return {
       "gdscript",
       "godot_resource",
       "gdshader",
+      "ron",
+      "wgsl",
     }
 
     local already_installed = require("nvim-treesitter.config").get_installed()

@@ -20,4 +20,5 @@ else
 end
 
 require("config.nvim")
+require("integration.kitty-langmap")
 require("config.lazy")
