@@ -18,3 +18,6 @@
   navigate = true  # use n and N to move between diff sections
 [init]
 	defaultBranch = master
+# machine-specific overrides (url rewrites), not tracked; included last so it wins
+[include]
+	path = local.config

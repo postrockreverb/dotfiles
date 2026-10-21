@@ -51,10 +51,13 @@ return {
 
       vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
         group = group,
-        callback = function()
+        callback = function(args)
+          if vim.bo[args.buf].buftype ~= "" then return end
           local lint = require("lint")
           lint.try_lint()
-          lint.try_lint("codespell")
+          -- nvim-lint has no wildcard filetype, so linters registered for "*" run explicitly
+          local any_ft = lint.linters_by_ft["*"]
+          if any_ft then lint.try_lint(any_ft) end
         end,
       })
     end,

@@ -9,6 +9,9 @@ return {
     preset = "helix",
     icons = {
       mappings = false,
+      keys = {
+        Bslash = "\\",
+      },
     },
     win = {
       border = "none",
@@ -21,6 +24,7 @@ return {
       -- groups
       { "<leader>t", group = "Telescope" },
       { "<leader>g", group = "Git" },
+      { "<leader>c", group = "Change" },
 
       -- buffers
       { "<leader>b", group = "Buffers" },
@@ -29,16 +33,16 @@ return {
       -- quickfix list
       { "<leader>q", group = "Quickfix list" },
       { "<leader>ql", "<cmd>copen<cr>", desc = "Open" },
-      { "<leader>qa", require("plugins.utils.qflist").add_current_line, desc = "Add current line" },
+      { "<leader>qa", require("plugins.utils.qflist").toggle_current_line, desc = "Toggle current line" },
       { "<leader>qc", require("plugins.utils.qflist").clear, desc = "Clear" },
       { "[q", "<cmd>cprev<cr>zz", desc = "Previous quickfix list item" },
       { "]q", "<cmd>cnext<cr>zz", desc = "Next quickfix list item" },
 
       -- lsp
       { "K", vim.lsp.buf.hover },
-      { "<leader>r", require("plugins.utils.renamer").rename_append, desc = "Lsp rename append" },
-      { "<leader>R", require("plugins.utils.renamer").rename_insert, desc = "Lsp rename insert" },
-      { "<leader>a", vim.lsp.buf.code_action, desc = "Lsp code action", mode = { "n", "v" } },
+      { "<leader>r", require("plugins.utils.renamer").rename_append, desc = "Rename append" },
+      { "<leader>R", require("plugins.utils.renamer").rename_insert, desc = "Rename insert" },
+      { "<leader>a", vim.lsp.buf.code_action, desc = "Code action", mode = { "n", "v" } },
 
       -- diagnostics
       { "<leader>d", group = "Diagnostics" },
@@ -57,7 +61,17 @@ return {
       { "<C-w>4", function() require("plugins.utils.splits").fraction(0.80) end, desc = "Window: 4/5 width" },
 
       -- cd to current file directory
-      { "<leader>cd", function() vim.fn.feedkeys(":cd " .. vim.fn.expand("%:p:h")) end, desc = "Cd to current file directory" },
+      { "<leader>cd", function() vim.fn.feedkeys(":cd " .. vim.fn.expand("%:p:h")) end, desc = "Directory" },
+
+      -- multicursors
+      { "zq", group = "Multicursor" },
+      { "zqn", desc = "Add cursors at search matches" },
+      { "zqgn", desc = "Add cursors at search matches" },
+      { "zq*", desc = "Add cursors at word matches" },
+      { "zqw", desc = "Add cursors at every word" },
+      { "Q", desc = "Toggle multicursor" },
+      { "gQ", desc = "Restore multicursors" },
+      { "q=", desc = "Toggle cursor follow mode" },
     })
   end,
 }

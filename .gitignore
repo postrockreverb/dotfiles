@@ -29,6 +29,7 @@ fish/conf.d
 
 !git
 !git/**/*
+git/local.config
 
 !kitty
 !kitty/**/*

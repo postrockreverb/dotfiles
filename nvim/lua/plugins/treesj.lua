@@ -1,7 +1,7 @@
 return {
   "Wansmer/treesj",
   keys = {
-    { "<leader>j", "<cmd>TSJToggle<cr>", desc = "Join/split code" },
+    { "<leader>j", "<cmd>TSJToggle<cr>", desc = "Join/split" },
   },
   dependencies = { "nvim-treesitter/nvim-treesitter" },
   opts = function()
@@ -24,6 +24,13 @@ return {
           map = lang_utils.set_preset_for_dict(),
           struct_entry = { target_nodes = { "struct", "tuple", "array", "map" } },
           map_entry = { target_nodes = { "struct", "tuple", "array", "map" } },
+        },
+        json5 = {
+          object = lang_utils.set_preset_for_dict(),
+          array = lang_utils.set_preset_for_list({
+            join = { space_in_brackets = false },
+          }),
+          member = { target_nodes = { "object", "array" } },
         },
       },
     }

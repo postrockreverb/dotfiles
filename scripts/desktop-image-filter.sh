@@ -3,7 +3,7 @@ set -euo pipefail
 
 usage() {
   echo "Usage: $0 [-a|--activate] [-s|--screen WxH] <input> <output>"
-  echo "  -a, --activate  add an \"Activate Linux\" watermark (font: \$WATERMARK_FONT or Segoe UI)"
+  echo "  -a, --activate  add an \"Activate Linux\" watermark (font: \$WATERMARK_FONT file or Helvetica)"
   echo "  -s, --screen    screen size in points the wallpaper is shown on with \"Fill Screen\" (default: 1512x982)"
   exit 1
 }
@@ -27,14 +27,9 @@ out="${args[1]}"
 
 watermark=()
 if [[ $activate -eq 1 ]]; then
-  # Windows uses Segoe UI; Selawik is Microsoft's metric-compatible open fallback
-  font="${WATERMARK_FONT:-}"
-  if [[ -z "$font" ]]; then
-    fonts=$(magick -list font | sed -n 's/^ *Font: //p')
-    for f in Segoe-UI SegoeUI Selawik Helvetica Arial; do
-      if grep -qx "$f" <<<"$fonts"; then font="$f"; break; fi
-    done
-  fi
+  # Font files, not names: ImageMagick builds without fontconfig list no fonts
+  font="${WATERMARK_FONT:-/System/Library/Fonts/Helvetica.ttc}"
+  [[ -f "$font" ]] || { echo "Watermark font not found: $font" >&2; exit 1; }
 
   # Layout in screen points, as on Windows 10 at 100% scaling: text starts 335pt
   # from the right edge, title/subtitle tops 135pt/100pt above the bottom edge.

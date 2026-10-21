@@ -29,6 +29,7 @@ return {
       "go",
       "rust",
       "json",
+      "json5",
       "templ",
       "c",
       "cpp",
