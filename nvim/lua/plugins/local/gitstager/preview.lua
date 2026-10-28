@@ -1,7 +1,7 @@
 -- Read-only diff preview: delta for anything with an index side, bat for
 -- untracked files. Rendered into a terminal buffer so the ANSI colours those
--- two produce survive, in a right split that never takes focus -- the tree
--- keeps the cursor and drives what is shown.
+-- two produce survive, in the modal's right float. The tree keeps the cursor
+-- and drives what is shown; <C-w>l steps in to search or yank, <C-w>h back.
 
 local config = require("plugins.local.gitstager.config")
 local git = require("plugins.local.gitstager.git")
@@ -9,8 +9,8 @@ local tree = require("plugins.local.gitstager.tree")
 
 local m = {}
 
--- The split is a singleton: previewing another row reuses it rather than
--- stacking splits.
+-- The modal's right float, handed over by attach. Every render swaps a fresh
+-- buffer into it.
 local win = -1
 local shown = nil
 local last = nil
@@ -64,15 +64,12 @@ local function read_plain(file)
   return lines and table.concat(lines, "\n") or ""
 end
 
-local function exists()
+local function alive()
   return vim.api.nvim_win_is_valid(win)
 end
 
--- There is one preview split, and it belongs to the tab you are looking at.
--- Rendering from another tab must not paint into a window nobody can see.
-local function alive()
-  return exists() and vim.api.nvim_win_get_tabpage(win) == vim.api.nvim_get_current_tabpage()
-end
+-- What the preview buffers answer to, beyond scrolling: { close, back }.
+local actions = {}
 
 m.is_open = alive
 
@@ -168,60 +165,23 @@ local function patch(root, node, on_done)
   end)
 end
 
-m.close = function()
-  if exists() then
-    vim.api.nvim_win_close(win, true)
-  end
-  win, shown, last = -1, nil, nil
+-- Take over the float `w`; `acts` is { close, back } for the preview's keys.
+m.attach = function(w, acts)
+  win, shown, last, rendered_width = w, nil, nil, nil
+  actions = acts or {}
 end
 
--- Hand the split over to a real file: the window stays, the preview lets go of
--- it. 'winfixbuf' has to come off here or nothing can be put there. Returns
--- the window, or nil if there was no preview.
-m.takeover = function()
-  if not alive() then
-    return nil
-  end
-
-  local target = win
-  vim.wo[target].winfixbuf = false
-  win, shown, last = -1, nil, nil
-  return target
-end
-
--- Put `buf` in the preview split, creating it if needed, and hand focus back to
--- wherever it was -- <C-p> and cursor movement both stay in the tree.
+-- Put `buf` in the float. Swapping the buffer is what 'winfixbuf' guards
+-- against, so it comes off for the swap and goes back on.
 local function place(buf)
-  local from = vim.api.nvim_get_current_win()
-
-  if alive() then
-    -- Swapping the buffer is what 'winfixbuf' guards against.
-    vim.wo[win].winfixbuf = false
-    vim.api.nvim_win_set_buf(win, buf)
-  else
-    -- A preview left behind in another tab: take it down first, one at a time.
-    if exists() then
-      vim.api.nvim_win_close(win, true)
-    end
-    vim.cmd("botright vsplit")
-    win = vim.api.nvim_get_current_win()
-    vim.api.nvim_win_set_buf(win, buf)
-    -- The tree keeps its slice, the preview takes the rest. Width is set once
-    -- here and never locked; afterwards vim's normal resizing rules apply.
-    if vim.api.nvim_win_is_valid(from) then
-      vim.api.nvim_win_set_width(from, config.width())
-    end
-  end
+  vim.wo[win].winfixbuf = false
+  vim.api.nvim_win_set_buf(win, buf)
 
   vim.wo[win][0].number = false
   vim.wo[win][0].relativenumber = false
   vim.wo[win][0].signcolumn = "no"
   vim.wo[win][0].wrap = false
   vim.wo[win].winfixbuf = true
-
-  if vim.api.nvim_win_is_valid(from) then
-    vim.api.nvim_set_current_win(from)
-  end
 end
 
 local function top()
@@ -241,7 +201,9 @@ local function show(text, colored)
   rendered_width = vim.api.nvim_win_get_width(win)
   -- Which side, and of what: the diff headers name the file, but an empty side
   -- or a bat-rendered untracked file would otherwise say neither.
-  vim.wo[win][0].winbar = ("  %%#GitStagerDir#%s%%*  %s"):format(side, shown or "")
+  -- Each side in its own colour, so which one is up reads at a glance.
+  local hl = side == "staged" and "GitStagerSideStaged" or "GitStagerSideUnstaged"
+  vim.wo[win][0].winbar = ("  %%#%s#%s%%*  %s"):format(hl, side, shown or "")
 
   if colored then
     vim.api.nvim_win_call(win, function()
@@ -255,8 +217,22 @@ local function show(text, colored)
 
   vim.bo[buf].modifiable = false
 
-  for _, lhs in ipairs({ "q", "<Esc>", "<C-p>", "<C-c>" }) do
-    vim.keymap.set("n", lhs, m.close, { buffer = buf, nowait = true, desc = "Close preview" })
+  local function bind(action, rhs, desc)
+    local lhs = config.opts.keys[action]
+    if not lhs or not rhs then
+      return
+    end
+    for _, key in ipairs(type(lhs) == "table" and lhs or { lhs }) do
+      vim.keymap.set("n", tostring(key), rhs, { buffer = buf, nowait = true, desc = desc })
+    end
+  end
+  bind("close", actions.close, "Close")
+  bind("focus_tree", actions.back, "Back to the tree")
+  -- Already here; nvim's own would leave the modal for the window behind it,
+  -- and so would going up or down.
+  bind("focus_preview", function() end, "Stay in the preview")
+  for _, lhs in ipairs({ "<C-w>j", "<C-w>k" }) do
+    vim.keymap.set("n", lhs, "<Nop>", { buffer = buf, nowait = true })
   end
   -- A terminal buffer would otherwise drop into terminal mode.
   for _, lhs in ipairs({ "i", "I", "a", "A", "o", "O" }) do
@@ -283,8 +259,8 @@ local function render(root, node, force)
 
   local function paint(text, colored)
     vim.schedule(function()
-      -- `shown` going nil means the split was closed while git was working.
-      if mine ~= token or shown == nil then
+      -- The modal may have closed while git was working.
+      if mine ~= token or not alive() then
         return
       end
       show(text or "", colored)
@@ -325,28 +301,28 @@ local function render(root, node, force)
   end)
 end
 
--- Switch sides and show it, opening the split if it was closed -- a mode you
--- cannot see is worse than no mode.
 m.flip = function(root, node)
   side = side == "unstaged" and "staged" or "unstaged"
-  render(root, node, true)
-end
-
--- <C-p>: open on this row, or close if it is already the one on screen.
-m.toggle = function(root, node)
-  if alive() and shown == node.path then
-    return m.close()
+  if alive() then
+    render(root, node, true)
   end
-  render(root, node, true)
 end
 
--- Cursor moved in the tree, or the tree changed under it.
+-- Set the side outright, for the staged-only view. No render of its own: the
+-- refresh that follows a filter change re-renders with force.
+m.side = function() return side end
+m.set_side = function(s) side = s end
+
+-- Cursor moved in the tree, or the tree changed under it. No row -- an empty
+-- tree -- leaves the float blank rather than showing a file that is gone.
 m.follow = function(root, node, force)
   if not alive() then
     return
   end
   if not node then
-    return m.close()
+    token = token + 1
+    shown, last = nil, nil
+    return show("", false)
   end
   render(root, node, force)
 end
@@ -354,7 +330,7 @@ end
 -- A terminal grid keeps the width it was born with, and delta was told that
 -- width too, so any resize means rendering the diff again. Debounced, because
 -- dragging a window border emits a resize per column.
-local function resize()
+m.resized = function()
   if not alive() or not last or vim.api.nvim_win_get_width(win) == rendered_width then
     return
   end
@@ -371,7 +347,6 @@ local function resize()
   )
 end
 
-vim.api.nvim_create_autocmd({ "WinResized", "VimResized" }, { callback = resize })
 
 m.scroll = function(key)
   if not alive() then

@@ -6,7 +6,7 @@
 local m = {}
 
 local defaults = {
-  -- How much of the screen the tree keeps once a diff or a file sits beside it.
+  -- How much of the modal the tree takes; the preview gets the rest.
   -- Below 1 it is read as a fraction of 'columns', 1 or more as a column count.
   -- Never narrower than 20.
   tree_width = 0.25,
@@ -16,8 +16,10 @@ local defaults = {
     split = "<C-s>",
     hsplit = "<C-h>",
     tab = "<C-t>",
-    preview = "<C-p>",
+    focus_preview = "<C-w>l",
+    focus_tree = "<C-w>h",
     side = "o",
+    filter = "f",
     scroll_down = "<C-d>",
     scroll_up = "<C-u>",
     scroll_line_down = "<C-e>",

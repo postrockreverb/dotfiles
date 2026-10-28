@@ -2,8 +2,11 @@ return {
   "gitstager",
   dir = vim.fn.stdpath("config") .. "/lua/plugins/local/gitstager",
   cmd = "Gs",
+  keys = {
+    { "<leader>gs", "<cmd>Gs<cr>", desc = "Git stager" },
+  },
   opts = {
-    -- Width the tree keeps once a diff or a file sits beside it. Under 1 it is
+    -- Width of the tree in the modal, the preview taking the rest. Under 1 it is
     -- a fraction of the screen, 1 or more a column count, never below 20.
     tree_width = 0.2,
 
@@ -14,8 +17,10 @@ return {
       split = "<C-s>",
       hsplit = "<C-h>",
       tab = "<C-t>",
-      preview = "<C-p>",
+      focus_preview = "<C-w>l",
+      focus_tree = "<C-w>h",
       side = "o",
+      filter = "f",
       scroll_down = "<C-d>",
       scroll_up = "<C-u>",
       scroll_line_down = "<C-e>",

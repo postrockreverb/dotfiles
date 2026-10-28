@@ -91,6 +91,12 @@ local function sort(node)
   end
 end
 
+-- Whether an entry belongs in the staged-only view: anything the next commit
+-- would carry, plus conflicts, which block that commit until resolved.
+m.in_staged = function(entry)
+  return entry.unmerged or STAGED[entry.x] or false
+end
+
 m.build = function(entries)
   local root = new_dir("", "")
   for _, entry in ipairs(entries) do

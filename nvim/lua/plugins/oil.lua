@@ -109,6 +109,9 @@ return {
   cmd = {
     "Oil",
   },
+  keys = {
+    { "<leader>e", "<cmd>Ex<cr>", desc = "Explorer" },
+  },
   opts = {
     columns = {},
     delete_to_trash = true,
