@@ -9,6 +9,15 @@
 !brew
 !brew/**/*
 
+!codex/
+!codex/AGENTS.md
+!codex/install.fish
+!codex/skills/
+!codex/skills/handoff/
+!codex/skills/handoff/SKILL.md
+!codex/skills/handoff/agents/
+!codex/skills/handoff/agents/openai.yaml
+
 !beets
 !beets/config.yaml
 
